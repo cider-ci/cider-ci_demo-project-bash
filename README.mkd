@@ -1,0 +1,9 @@
+
+Bash Demo Project for Cider-CI
+==============================
+
+This is a demonstration project for [Cider-CI][]. It provides a few bash scripts
+and contains a execution definition.
+
+  [Cider-CI]: https://github.com/DrTom/cider-ci
+
