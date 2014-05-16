@@ -19,6 +19,11 @@ contexts:
     scripts:
       main:
         body: env | sort
+  - name: Show functions 
+    scripts:
+      main:
+        body: declare -F | sort
+
 - name: Scripts 
   tasks:
   - name: Success with exactly p=1/7 
