@@ -16,5 +16,4 @@ of a _CIDER_CI execution definition_. Such as:
 
 
 
-  [Cider-CI]: https://github.com/DrTom/cider-ci
-
+  [Cider-CI]: https://github.com/cider-ci/cider-ci
