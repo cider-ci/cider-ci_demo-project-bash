@@ -56,33 +56,42 @@ subcontexts:
 
 
     tasks:
+
     - name: Success with exactly p=1/7 
       eager_trials: 3
       auto_trials: 10
       scripts: 
         main:
           body: ./bin/randomly-failing
+
     - name: Timeout for a randomly sleeping bash script
       scripts: 
         main:
           body: ./bin/sleeping-randomly-long
           timeout: 40
+
     - name: Just sleeping a minute
       scripts: 
         main:
           body: sleep 60 && exit 0 
+            
     - name: Just sleeping two minutes
       scripts: 
         main:
           body: sleep 120 && exit 0 
+
     - name: Just sleeping three minutes
       scripts: 
         main:
           body: sleep 180 && exit 0 
+
     - name: Create an log file to be attached
       scripts:
         main: 
           body: mkdir -p log &&
                 echo '[INFO] Hello World!' > log/hello.log
-                
 
+    - name: Create a result file result.json to be embedded 
+      scripts:
+        main: 
+          body: ./bin/create-result-json
