@@ -1,0 +1,10 @@
+env_vars:
+  name: Set and Show Environment Variables
+  environment_variables:
+    CI_THE_ANSWER: 42
+    CI_NULL_ENV_VAR: NULL
+    CI_BOOL_ENV_VAR: false
+  scripts:
+    main:
+      body: "env | sort"
+

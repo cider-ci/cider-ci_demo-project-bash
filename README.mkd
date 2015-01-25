@@ -5,20 +5,9 @@ Bash Demo Project for Cider-CI
 This is a demonstration project for [Cider-CI][]. Every task is based on
 a simple bash script. 
 
-The [`test_spec`](cider-ci_v2/test_spec.yml) file demonstrates many concepts 
-of a _CIDER_CI execution definition_. Such as: 
-
-* properties of a task such, as 
-  * `eager_trials`,
-  * `auto_trials`,
-  * `traits` 
-
-* organization of tasks in `subcontexts` and inheritance
-  of `task_defaults` from the parents
-
-
-and much more. 
-
+Almost all features of the Cider-CI dot-file [.cider-ci.yml](.cider-ci.yml) and
+the Cider-CI specification [.cider-ci/](.cider-ci/) are covered by the given
+examples.
 
 
   [Cider-CI]: https://github.com/cider-ci/cider-ci

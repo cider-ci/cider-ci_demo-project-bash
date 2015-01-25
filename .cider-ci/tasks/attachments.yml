@@ -1,0 +1,20 @@
+Attachments-Demo:
+
+  name: Attachments Demo
+
+  trial_attachments:
+    logs:
+      glob: log/*.log
+      content-type: text/plain
+
+  tree_attachments:
+    logs:
+      glob: log/*.log
+      content-type: text/plain
+
+  scripts:
+    main:
+      body: mkdir -p log &&
+            echo '[INFO] Hello World!' > log/hello.log
+
+

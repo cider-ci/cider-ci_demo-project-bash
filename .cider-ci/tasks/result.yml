@@ -1,0 +1,13 @@
+result:
+
+  name: Result Embedding Demo
+
+  description: >
+    This tasks creates a result.json file and demonstrates the embedding of
+    the contents as the result in script, and task.  The result property is
+    available in the execution if and only if it contains exactly this task
+    and no further.  
+
+  scripts:
+    main: 
+      body: ./bin/create-result-json

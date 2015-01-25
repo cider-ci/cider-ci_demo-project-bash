@@ -1,0 +1,64 @@
+executions:
+
+  "Tests":
+    default: true
+    specification:
+      _cider-ci_include: /.cider-ci/test_spec.yml
+    description: >
+      Includes the specification from the file `/.cider-ci/test_spec.yml`.
+
+  "All":
+    specification:
+      _cider-ci_include: /.cider-ci/all_spec.yml
+    description: >
+      Includes the specification from the file `/.cider-ci/all_spec.yml`.
+
+  "Attachments-Demo": 
+    specification:
+      name: Attachments Demo
+      task_defaults:
+        traits:
+          linux: true
+      tasks:
+        _cider-ci_include: /.cider-ci/tasks/attachments.yml
+
+  "Info": 
+    specification:
+      name: Show info
+      task_defaults:
+        traits:
+          linux: true
+      tasks:
+        _cider-ci_include: /.cider-ci/tasks/infos.yml
+
+  "Environment-Variables-Demo": 
+    specification:
+      name: Environment Variables Demo
+      task_defaults:
+        environment_variables:
+          CI_TASK_DEFAULTS: "Inherited!"
+        traits:
+          linux: true
+      tasks:
+        _cider-ci_include: /.cider-ci/tasks/environment_variables.yml
+
+  "Ports-Demo":
+    specification:
+      name: Ports Demo
+      task_defaults:
+        traits:
+          linux: true
+      tasks:
+        _cider-ci_include: /.cider-ci/tasks/ports.yml
+
+  "Result-Demo":
+    specification:
+      name: Result Demo
+      task_defaults:
+        traits:
+          linux: true
+      tasks:
+        _cider-ci_include: /.cider-ci/tasks/result.yml
+
+
+
