@@ -30,3 +30,6 @@ subcontexts:
         - /.cider-ci/tasks/ports.yml
         - /.cider-ci/tasks/result.yml
       
+  submodule:
+    _cider-ci_include: /.cider-ci/shared/submodule_context.yml
+

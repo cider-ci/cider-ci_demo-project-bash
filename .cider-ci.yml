@@ -13,6 +13,10 @@ executions:
     description: >
       Includes the specification from the file `/.cider-ci/all_spec.yml`.
 
+  "Submodule":
+    specification: 
+      _cider-ci_include: /.cider-ci/shared/submodule_context.yml
+
   "Attachments-Demo": 
     specification:
       name: Attachments Demo
