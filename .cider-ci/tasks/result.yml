@@ -8,6 +8,11 @@ result:
     available in the execution if and only if it contains exactly this task
     and no further.  
 
+  trial_attachments:
+    result_file:
+      glob: result.json
+      content-type: application/json
+
   scripts:
     main: 
       body: ./bin/create-result-json

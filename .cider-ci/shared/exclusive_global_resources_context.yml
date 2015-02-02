@@ -1,0 +1,33 @@
+name: Exclusive-Global-Resources Demo
+
+task_defaults:
+  eager_trials: 2
+  auto_trials: 2
+  priority: 3
+
+  traits:
+    linux: true
+
+  exclusive_global_resources:
+    "/tmp/timestamps.log": true
+   
+  trial_attachments:
+    logs:
+      glob: /tmp/timestamp.log
+      content-type: text/plain
+
+  scripts: 
+    main: 
+      body: | 
+        echo "$CIDER_CI_TASK_ID $CIDER_CI_TRIAL_ID - START $(date)"  >> /tmp/timestamp.log
+        sleep 5
+        echo "$CIDER_CI_TASK_ID $CIDER_CI_TRIAL_ID - MIDDLE $(date)"  >> /tmp/timestamp.log
+        sleep 5
+        echo "$CIDER_CI_TASK_ID $CIDER_CI_TRIAL_ID - END $(date)"  >> /tmp/timestamp.log
+
+tasks: 
+  Task1: 
+    name: Task1 - write timestamps 
+  Task2: 
+    name: Task2 - write timestamps 
+

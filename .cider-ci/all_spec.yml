@@ -33,3 +33,6 @@ subcontexts:
   submodule:
     _cider-ci_include: /.cider-ci/shared/submodule_context.yml
 
+  exclusive_global_resources:
+    _cider-ci_include: /.cider-ci/shared/exclusive_global_resources_context.yml
+
