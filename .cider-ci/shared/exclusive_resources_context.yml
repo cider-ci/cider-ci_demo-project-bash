@@ -1,14 +1,8 @@
-name: Exclusive-Global-Resources Demo
+name: Exclusive-Resources Demo
 
 task_defaults:
-  eager_trials: 2
-  auto_trials: 2
-  priority: 3
 
-  traits:
-    linux: true
-
-  exclusive_global_resources:
+  exclusive_resources:
     "/tmp/timestamps.log": true
    
   trial_attachments:
@@ -30,4 +24,6 @@ tasks:
     name: Task1 - write timestamps 
   Task2: 
     name: Task2 - write timestamps 
+
+_cider-ci_include: /.cider-ci/shared/defaults.yml
 

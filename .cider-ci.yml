@@ -1,23 +1,37 @@
 executions:
 
-  "All":
-    description: >
-      This execution runs all the tasks defined in this project. 
-    specification:
-      _cider-ci_include: /.cider-ci/all_spec.yml
-
   "Attachments-Demo": 
-    description: >
+    description: |
       This execution demonstrates the usage of the `tree_attachments` and
       `trial_attachments` directive.  It creates a file which is then attached
       as a tree- as well as a trial-attachment. 
     specification:
       name: Attachments Demo
-      task_defaults:
-        traits:
-          linux: true
+      _cider-ci_include: /.cider-ci/shared/defaults.yml
       tasks:
         _cider-ci_include: /.cider-ci/tasks/attachments.yml
+
+  "Chain-Prerequisite-Demo": 
+    description: |
+      This one serves as a prerequisite to the "Chain-Dependent-Demo".
+    specification: 
+      name: Chain-Prerequisite-Demo
+      _cider-ci_include: /.cider-ci/shared/sleeping_task_context.yml
+
+  "Chain-Dependent-Demo": 
+    description: |
+      This demo can only be started if the "Chain-Prerequisite-Demoe" has
+      passed. There is also a trigger which will start this demo when
+      the prerequisite has finished and the commit is part of the head of
+      a brach matching the given regular expression. 
+    specification: 
+      name: Chain-Dependent-Demo
+      _cider-ci_include: /.cider-ci/shared/sleeping_task_context.yml
+    depends:
+      executions:
+        "Chain-Prerequisite-Demo": passed
+        "Trigger-Demo": passed
+    trigger: true
 
   "Environment-Variables-Demo": 
     description: |
@@ -26,59 +40,52 @@ executions:
       with `env | sort`. 
     specification:
       name: Environment Variables Demo
+      _cider-ci_include: /.cider-ci/shared/defaults.yml
       task_defaults:
         environment_variables:
           CI_TASK_DEFAULTS: "Inherited!"
-        traits:
-          linux: true
       tasks:
         _cider-ci_include: /.cider-ci/tasks/environment_variables.yml
 
-  "Exclusive-Global-Resources-Demo": 
+  "Exclusive-Resources-Demo": 
     description: |
-      This execution demonstrates the `exclusive_global_resources` directive.
+      This execution demonstrates the `exclusive_resources` directive.
       Two tasks declare exclusive access to `/tmp/timestamps.log`.  The
       `eager_trials` directive is used to generate effectively four trials.  At
       any time at **most one** trial is _executing_. This can be verified by
       the timestamps in the attachments. 
     specification: 
-      _cider-ci_include: /.cider-ci/shared/exclusive_global_resources_context.yml
+      _cider-ci_include: /.cider-ci/shared/exclusive_resources_context.yml
 
   "Info": 
-    description: >
+    description: |
       This execution runs a few tasks which show various information, e.g.
       `ls`, `git log`, ...
     specification:
       name: Show info
-      task_defaults:
-        traits:
-          linux: true
+      _cider-ci_include: /.cider-ci/shared/defaults.yml
       tasks:
         _cider-ci_include: /.cider-ci/tasks/infos.yml
 
   "Ports-Demo":
-    description: >
+    description: |
       This execution demonstrates the usage of the `ports` directive.  The
       output of `env | sort` shows the assigned port as the value of the given
       name.
     specification:
       name: Ports Demo
-      task_defaults:
-        traits:
-          linux: true
+      _cider-ci_include: /.cider-ci/shared/defaults.yml
       tasks:
         _cider-ci_include: /.cider-ci/tasks/ports.yml
 
   "Result-Demo":
-    description: >
+    description: |
       This execution creates the specially treated `result.json` file with
       `value`, and `summary` properties.  It also attaches the `result.json` by
       the `trial_attachments` directive. 
     specification:
       name: Result Demo
-      task_defaults:
-        traits:
-          linux: true
+      _cider-ci_include: /.cider-ci/shared/defaults.yml
       tasks:
         _cider-ci_include: /.cider-ci/tasks/result.yml
 
@@ -97,4 +104,15 @@ executions:
       combines both by using the `timeout` directive of a script.
     specification:
       _cider-ci_include: /.cider-ci/test_spec.yml
+
+  "Trigger-Demo": 
+    description: |
+      This execution will be automatically run when a commit containing
+      it becomes the head of a branch. 
+      The `trigger` property accepts the same values as the `depends` property.
+    trigger: 
+      branch: '^master|wip.*$'
+    specification: 
+      name: Trigger-Demo
+      _cider-ci_include: /.cider-ci/shared/sleeping_task_context.yml
 

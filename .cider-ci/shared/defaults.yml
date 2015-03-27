@@ -1,0 +1,5 @@
+task_defaults:
+  traits:
+    linux: true
+    bash: true
+

@@ -6,5 +6,5 @@ env_vars:
     CI_BOOL_ENV_VAR: false
   scripts:
     main:
-      body: "env | sort"
+      body: env | sort 
 
