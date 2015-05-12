@@ -1,118 +1,94 @@
-executions:
+jobs:
 
-  "Attachments-Demo": 
-    description: |
-      This execution demonstrates the usage of the `tree_attachments` and
-      `trial_attachments` directive.  It creates a file which is then attached
-      as a tree- as well as a trial-attachment. 
-    specification:
-      name: Attachments Demo
-      _cider-ci_include: /.cider-ci/shared/defaults.yml
-      tasks:
-        _cider-ci_include: /.cider-ci/tasks/attachments.yml
+- name: Attachments Demo
+  description: |
+    This job demonstrates the usage of the `tree_attachments` and
+    `trial_attachments` directive.  It creates a file which is then attached
+    as a tree- as well as a trial-attachment. 
+  _cider-ci_include: 
+    - .cider-ci/jobs/attachments_demo.yml
 
-  "Chain-Prerequisite-Demo": 
-    description: |
-      This one serves as a prerequisite to the "Chain-Dependent-Demo".
-    specification: 
-      name: Chain-Prerequisite-Demo
-      _cider-ci_include: /.cider-ci/shared/sleeping_task_context.yml
+- name: Contexts Demo
+  description:
+    This job demonstrates the use of contexts and the inheritance 
+    of `task_defaults` e.g. from the top level context to its 
+    subcontexts. 
+  _cider-ci_include: .cider-ci/jobs/contexts_demo.yml
 
-  "Chain-Dependent-Demo": 
-    description: |
-      This demo can only be started if the "Chain-Prerequisite-Demoe" has
-      passed. There is also a trigger which will start this demo when
-      the prerequisite has finished and the commit is part of the head of
-      a brach matching the given regular expression. 
-    specification: 
-      name: Chain-Dependent-Demo
-      _cider-ci_include: /.cider-ci/shared/sleeping_task_context.yml
-    depends:
-      executions:
-        "Chain-Prerequisite-Demo": passed
-        "Trigger-Demo": passed
-    trigger: true
+- name: Dependencies and Triggers Depends 
+  description: |
+    This demo can only be started if the "Dependencies and Triggers
+    Prerequisite" has passed. There is also a corresponding trigger defined for
+    the sake of demonstration. In practice setting `triggers: true` would be more
+    simple and general. 
+  _cider-ci_include: .cider-ci/jobs/depends.yml
 
-  "Environment-Variables-Demo": 
-    description: |
-      This execution Demonstrates the usage of the `environment_variables`
-      directive.  It specifies a tasks which lists the environment variables
-      with `env | sort`. 
-    specification:
-      name: Environment Variables Demo
-      _cider-ci_include: /.cider-ci/shared/defaults.yml
-      task_defaults:
-        environment_variables:
-          CI_TASK_DEFAULTS: "Inherited!"
-      tasks:
-        _cider-ci_include: /.cider-ci/tasks/environment_variables.yml
+- name: Dependencies and Triggers Prerequisite 
+  description: |
+    This one serves as a prerequisite to "Dependencies and Triggers Depends".
+    Additionally it will be automatically triggered if a branch matching the
+    regular expression /^trigger-prerequisite$/ is updated. 
+  _cider-ci_include: .cider-ci/jobs/prerequisite.yml
 
-  "Exclusive-Resources-Demo": 
-    description: |
-      This execution demonstrates the `exclusive_resources` directive.
-      Two tasks declare exclusive access to `/tmp/timestamps.log`.  The
-      `eager_trials` directive is used to generate effectively four trials.  At
-      any time at **most one** trial is _executing_. This can be verified by
-      the timestamps in the attachments. 
-    specification: 
-      _cider-ci_include: /.cider-ci/shared/exclusive_resources_context.yml
+- name: Depending and Ignoring Scripts Demo
+  description: |
+    This job demonstrates scripts that are defined to depend on each other and
+    also how the final state of certain scripts can be ignored. 
+  _cider-ci_include: .cider-ci/jobs/depending_and_ignoring_scripts_demo.yml
 
-  "Info": 
-    description: |
-      This execution runs a few tasks which show various information, e.g.
-      `ls`, `git log`, ...
-    specification:
-      name: Show info
-      _cider-ci_include: /.cider-ci/shared/defaults.yml
-      tasks:
-        _cider-ci_include: /.cider-ci/tasks/infos.yml
+- name: Eager and Retry Demo
+  decription: |
+    This is a job with probabilistic outcome. The task in this job succeeds
+    with probability 1/7. We try eagerly with 4 trials and retry up to 10
+    times. The total probability of success for the job is hence about 79%.
+  _cider-ci_include: .cider-ci/jobs/eager_and_retry_demo.yml
 
-  "Ports-Demo":
-    description: |
-      This execution demonstrates the usage of the `ports` directive.  The
-      output of `env | sort` shows the assigned port as the value of the given
-      name.
-    specification:
-      name: Ports Demo
-      _cider-ci_include: /.cider-ci/shared/defaults.yml
-      tasks:
-        _cider-ci_include: /.cider-ci/tasks/ports.yml
+- name: Environment Variables Demo
+  description: |
+    This job Demonstrates the usage of the `environment_variables`
+    directive.  It specifies a tasks which lists the environment variables
+    with `env | sort`. 
+  _cider-ci_include: .cider-ci/jobs/env_vars_demo.yml
 
-  "Result-Demo":
-    description: |
-      This execution creates the specially treated `result.json` file with
-      `value`, and `summary` properties.  It also attaches the `result.json` by
-      the `trial_attachments` directive. 
-    specification:
-      name: Result Demo
-      _cider-ci_include: /.cider-ci/shared/defaults.yml
-      tasks:
-        _cider-ci_include: /.cider-ci/tasks/result.yml
+- name: Exclusive Resources Demo
+  description: |
+    This job demonstrates the `exclusive_resources` directive.
+    Two tasks declare exclusive access to `/tmp/timestamps.log`.  The
+    `eager_trials` directive is used to generate effectively four trials.  At
+    any time at **most one** trial is _executing_. This can be verified by
+    the timestamps in the attachments. 
+  _cider-ci_include: .cider-ci/jobs/exclusive_resources_demo.yml
 
-  "Submodule-Demo":
-    description: |
-      This execution demonstrates  the usage of the `git_options`/`submodule`
-      specification.  It also checks some properties of the checked out
-      submodules and fails if they would not be present. 
-    specification: 
-      _cider-ci_include: /.cider-ci/shared/submodule_context.yml
+- name: Ports Demo
+  description: |
+    This job demonstrates the usage of the `ports` directive.  The
+    output of `env | sort` shows the assigned port as the value of the given
+    name.
+  _cider-ci_include: .cider-ci/jobs/ports_demo.yml
 
-  "Tests":
-    description: >
-      This executions runs several bash scripts. Some of them sleep for a
-      while.  Some of them fail with a certain probability.  One of them
-      combines both by using the `timeout` directive of a script.
-    specification:
-      _cider-ci_include: /.cider-ci/test_spec.yml
+- name: Result Demo
+  description: |
+    This job creates the specially treated `result.json` file with
+    `value`, and `summary` properties.  It also attaches the `result.json` by
+    the `trial_attachments` directive. 
+  _cider-ci_include: .cider-ci/jobs/result_demo.yml
 
-  "Trigger-Demo": 
-    description: |
-      This execution will be automatically run when a commit containing
-      it becomes the head of a branch. 
-      The `trigger` property accepts the same values as the `depends` property.
-    trigger: 
-      branch: '^master|wip.*$'
-    specification: 
-      name: Trigger-Demo
-      _cider-ci_include: /.cider-ci/shared/sleeping_task_context.yml
+- name: Show Infos
+  description: |
+    This job runs a few tasks which show various information, e.g.
+    `ls`, `git log`, ...
+  _cider-ci_include: .cider-ci/jobs/info_demo.yml
+
+- name: Submodule Demo
+  description: |
+    This job demonstrates  the usage of the `git_options`/`submodule`
+    specification.  It also checks some properties fails if they 
+    the feature would not work as expected. 
+  _cider-ci_include: .cider-ci/jobs/submodule_demo.yml
+
+- name: Timeout Demo
+  decription: |
+    This job has one task which will fail because it times out 
+    and one that will pass.
+  _cider-ci_include: .cider-ci/jobs/timeout_demo.yml
 

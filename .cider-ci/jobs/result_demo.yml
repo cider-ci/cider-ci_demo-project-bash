@@ -1,11 +1,13 @@
-result:
+_cider-ci_include: .cider-ci/shared/defaults.yml
 
-  name: Result Embedding Demo
+tasks:
+
+- name: Result Embedding Demo
 
   description: >
     This tasks creates a result.json file and demonstrates the embedding of
     the contents as the result in script, and task.  The result property is
-    available in the execution if and only if it contains exactly this task
+    available in the job if and only if it contains exactly this task
     and no further.  
 
   trial_attachments:

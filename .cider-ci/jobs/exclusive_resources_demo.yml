@@ -1,4 +1,4 @@
-name: Exclusive-Resources Demo
+_cider-ci_include: .cider-ci/shared/defaults.yml
 
 task_defaults:
 
@@ -24,6 +24,4 @@ tasks:
     name: Task1 - write timestamps 
   Task2: 
     name: Task2 - write timestamps 
-
-_cider-ci_include: /.cider-ci/shared/defaults.yml
 

@@ -1,0 +1,13 @@
+_cider-ci_include: .cider-ci/shared/defaults.yml
+
+triggers: 
+- type: branch.updated
+  regex: ^trigger-prerequisite$
+
+tasks: 
+- name: Sleep
+  scripts:
+    main: 
+      body: sleep 3 && echo "done sleeping" 
+
+

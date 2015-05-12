@@ -1,0 +1,37 @@
+_cider-ci_include: .cider-ci/shared/defaults.yml
+
+task_defaults:
+  eager_trials: 1
+  auto_trials: 2
+
+  git_options: 
+    submodules: 
+      clone: True 
+      timeout: 30
+
+tasks: 
+
+- name: Verify that file in submodule does exist
+  scripts: 
+    main: 
+      body: test -f submodule/README.mkd
+
+- name: List submodule directory
+  scripts: 
+    main: 
+      body: 
+        ls -lah submodule 
+
+- name: Verify proper commit in submodule directory 
+  scripts: 
+    main: 
+      body: cd submodule && test $(git log -n 1 --pretty='%H') == cec555fbe7b525c61c53f5233e4af4d4325732ea
+
+- name: Verify that file in submodule does not exist if clone is False
+  git_options: 
+    submodules: 
+      clone: False
+  scripts: 
+    main: 
+      body: test ! -f submodule/README.mkd
+

@@ -1,0 +1,30 @@
+_cider-ci_include: .cider-ci/shared/defaults.yml
+
+tasks: 
+
+- name: Pass Timeout
+
+  scripts:
+    main:
+      timeout: 5
+      body: sleep 1 && exit 0
+
+- name: Fail Timeout
+
+  description: |
+    We sleep much longer than the timeout allows.  This is a hard case for
+    subprocess termination because of the sub-shell. The script will be 
+    terminated properly under Linux, but not under Mac Os X e.g. 
+
+  trial_attachments:
+    logs:
+      glob: log.txt
+      content-type: text/plain
+
+  scripts:
+    main:
+      timeout: 5
+      body: |
+        #!/usr/bin/env bash
+        echo "MY PID $$" >> log.txt 
+        sleep 100 &&  exit 0
