@@ -86,8 +86,19 @@ jobs:
     the feature would not work as expected. 
   _cider-ci_include: .cider-ci/jobs/submodule_demo.yml
 
+- name: Task Generator Demo
+  description: | 
+    This is proposal a file based task generator. The functionality might
+    change and is not part of version 3 of Cider-CI. 
+  task_defaults:
+    scripts:
+      main:
+        body: bash -c $CIDER_CI_TASK_FILE
+  _cider-ci_expand-to-tasks: 
+    include-match: specs/.*_spec.sh
+
 - name: Timeout Demo
-  decription: |
+  description: |
     This job has one task which will fail because it times out 
     and one that will pass.
   _cider-ci_include: .cider-ci/jobs/timeout_demo.yml
