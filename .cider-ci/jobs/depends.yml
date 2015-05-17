@@ -10,6 +10,7 @@ dependencies:
 - type: job
   name: "Dependencies and Triggers Prerequisite"
   states: [passed]
+
 triggers: 
 - type: job.updated
   name: "Dependencies and Triggers Prerequisite"

@@ -2,7 +2,7 @@ _cider-ci_include: .cider-ci/shared/defaults.yml
 
 triggers: 
 - type: branch.updated
-  regex: ^trigger-prerequisite$
+  include-match: ^trigger-prerequisite$
 
 tasks: 
 - name: Sleep
