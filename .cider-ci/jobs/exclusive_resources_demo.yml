@@ -1,6 +1,6 @@
 _cider-ci_include: .cider-ci/shared/defaults.yml
 
-task_defaults:
+task-defaults:
 
   exclusive_resources:
     "/tmp/timestamps.log": true

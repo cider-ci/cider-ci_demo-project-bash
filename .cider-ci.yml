@@ -11,7 +11,7 @@ jobs:
 - name: Contexts Demo
   description:
     This job demonstrates the use of contexts and the inheritance 
-    of `task_defaults` e.g. from the top level context to its 
+    of `task-defaults` e.g. from the top level context to its 
     subcontexts. 
   _cider-ci_include: .cider-ci/jobs/contexts_demo.yml
 
@@ -90,7 +90,7 @@ jobs:
   description: | 
     This is proposal a file based task generator. The functionality might
     change and is not part of version 3 of Cider-CI. 
-  task_defaults:
+  task-defaults:
     scripts:
       main:
         body: bash -c $CIDER_CI_TASK_FILE

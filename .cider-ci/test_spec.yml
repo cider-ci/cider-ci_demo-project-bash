@@ -1,7 +1,7 @@
 ---
 name: Run tests
 
-task_defaults:
+task-defaults:
   eager_trials: 1
   auto_trials: 2
   traits:

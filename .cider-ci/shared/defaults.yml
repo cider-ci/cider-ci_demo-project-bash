@@ -1,4 +1,4 @@
-task_defaults:
+task-defaults:
   traits:
     linux: true
     bash: true
