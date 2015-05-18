@@ -1,6 +1,6 @@
 _cider-ci_include: .cider-ci/shared/defaults.yml
 
-script_defaults: 
+script-defaults: 
   body: echo $(date) && sleep 1 && echo $(date) && test a = a
 
 tasks:
@@ -18,7 +18,7 @@ tasks:
   scripts: 
   - name: script-failing
     body: echo $(date) && sleep 1 && echo $(date) && test a = b
-    ignore_state: true
+    ignore-state: true
 
 - name: Skip
   description: |
@@ -39,12 +39,12 @@ tasks:
   scripts: 
   - name: unmet-dependency
     body: echo $(date) && sleep 1 && echo $(date) && test a = b
-    ignore_state: true
+    ignore-state: true
     dependencies:
     - type: script
       name: script-root
       states: [passed]
-    ignore_state: true
+    ignore-state: true
 
 - name: All in one
   description: |
@@ -58,12 +58,12 @@ tasks:
         states: [passed]
     script-failing:
       body: echo $(date) && sleep 1 && echo $(date) && test a = b
-      ignore_state: true
+      ignore-state: true
       dependencies:
         script-depending-root-passed: 
           states: [passed]
     script-depend-failing-failed-passed:
-      ignore_state: true
+      ignore-state: true
       dependencies:
         script-failing:
           states: [passed]

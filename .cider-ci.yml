@@ -2,8 +2,8 @@ jobs:
 
 - name: Attachments Demo
   description: |
-    This job demonstrates the usage of the `tree_attachments` and
-    `trial_attachments` directive.  It creates a file which is then attached
+    This job demonstrates the usage of the `tree-attachments` and
+    `trial-attachments` directive.  It creates a file which is then attached
     as a tree- as well as a trial-attachment. 
   _cider-ci_include: 
     - .cider-ci/jobs/attachments_demo.yml
@@ -45,19 +45,19 @@ jobs:
 
 - name: Environment Variables Demo
   description: |
-    This job Demonstrates the usage of the `environment_variables`
+    This job Demonstrates the usage of the `environment-variables`
     directive.  It specifies a tasks which lists the environment variables
     with `env | sort`. 
   _cider-ci_include: .cider-ci/jobs/env_vars_demo.yml
 
 - name: Exclusive Resources Demo
   description: |
-    This job demonstrates the `exclusive_resources` directive.
+    This job demonstrates the `exclusive-resources` directive.
     Two tasks declare exclusive access to `/tmp/timestamps.log`.  The
-    `eager_trials` directive is used to generate effectively four trials.  At
+    `eager-trials` directive is used to generate effectively four trials.  At
     any time at **most one** trial is _executing_. This can be verified by
     the timestamps in the attachments. 
-  _cider-ci_include: .cider-ci/jobs/exclusive_resources_demo.yml
+  _cider-ci_include: .cider-ci/jobs/exclusive-resources_demo.yml
 
 - name: Ports Demo
   description: |
@@ -70,7 +70,7 @@ jobs:
   description: |
     This job creates the specially treated `result.json` file with
     `value`, and `summary` properties.  It also attaches the `result.json` by
-    the `trial_attachments` directive. 
+    the `trial-attachments` directive. 
   _cider-ci_include: .cider-ci/jobs/result_demo.yml
 
 - name: Show Infos
@@ -81,7 +81,7 @@ jobs:
 
 - name: Submodule Demo
   description: |
-    This job demonstrates  the usage of the `git_options`/`submodule`
+    This job demonstrates  the usage of the `git-options`/`submodule`
     specification.  It also checks some properties fails if they 
     the feature would not work as expected. 
   _cider-ci_include: .cider-ci/jobs/submodule_demo.yml

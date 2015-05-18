@@ -4,9 +4,9 @@ tasks:
 
 - name: Fail with 7:1
 
-  eager_trials: 4
+  eager-trials: 4
 
-  max_auto_trials: 10
+  max-auto-trials: 10
 
   scripts:
     main:

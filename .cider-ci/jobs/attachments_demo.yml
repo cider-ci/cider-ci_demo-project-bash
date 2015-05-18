@@ -3,12 +3,12 @@ tasks:
 
 - name: Attachments Demo
 
-  trial_attachments:
+  trial-attachments:
     logs:
       glob: tmp/*trial*.txt 
       content-type: text/plain
 
-  tree_attachments:
+  tree-attachments:
     logs:
       glob: tmp/*tree*.txt 
       content-type: text/plain

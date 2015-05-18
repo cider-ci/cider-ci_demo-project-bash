@@ -1,7 +1,7 @@
 _cider-ci_include: .cider-ci/shared/defaults.yml
 
 task-defaults:
-  environment_variables:
+  environment-variables:
     CI_TASK_DEFAULTS: "Inherited!"
 
 tasks: 

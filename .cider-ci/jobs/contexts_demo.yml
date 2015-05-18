@@ -2,7 +2,7 @@ _cider-ci_include: .cider-ci/shared/defaults.yml
 
 
 task-defaults: 
-  environment_variables:
+  environment-variables:
      STAR: Sun
      PLANET: Earth
      MOON: Moon
@@ -21,7 +21,7 @@ subcontexts:
   - name: Jupiter 
 
     task-defaults: 
-      environment_variables:
+      environment-variables:
         PLANET: Jupiter
 
     tasks: 
@@ -36,7 +36,7 @@ subcontexts:
     - name: Io
 
       task-defaults: 
-        environment_variables:
+        environment-variables:
           MOON: Io
 
       tasks: 

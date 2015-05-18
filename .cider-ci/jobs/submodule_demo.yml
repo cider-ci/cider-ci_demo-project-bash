@@ -1,10 +1,10 @@
 _cider-ci_include: .cider-ci/shared/defaults.yml
 
 task-defaults:
-  eager_trials: 1
-  auto_trials: 2
+  eager-trials: 1
+  max-auto-trials: 2
 
-  git_options: 
+  git-options: 
     submodules: 
       clone: True 
       timeout: 30
@@ -28,7 +28,7 @@ tasks:
       body: cd submodule && test $(git log -n 1 --pretty='%H') == cec555fbe7b525c61c53f5233e4af4d4325732ea
 
 - name: Verify that file in submodule does not exist if clone is False
-  git_options: 
+  git-options: 
     submodules: 
       clone: False
   scripts: 

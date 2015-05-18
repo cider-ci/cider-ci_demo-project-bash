@@ -16,7 +16,7 @@ tasks:
     subprocess termination because of the sub-shell. The script will be 
     terminated properly under Linux, but not under Mac Os X e.g. 
 
-  trial_attachments:
+  trial-attachments:
     logs:
       glob: log.txt
       content-type: text/plain

@@ -1,7 +1,7 @@
 failrand:
   name: Success with exactly p=1/7 
-  eager_trials: 3
-  auto_trials: 10
+  eager-trials: 3
+  max-auto-trials: 10
   scripts: 
     main:
       body: ./bin/randomly-failing

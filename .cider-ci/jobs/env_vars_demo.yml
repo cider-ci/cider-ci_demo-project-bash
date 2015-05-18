@@ -1,13 +1,13 @@
 _cider-ci_include: .cider-ci/shared/defaults.yml
 
 task-defaults:
-  environment_variables:
+  environment-variables:
     CI_TASK_DEFAULTS: "Inherited!"
 
 tasks: 
 
 - name: Set and Show Environment Variables
-  environment_variables:
+  environment-variables:
     CI_THE_ANSWER: 42
     CI_NULL_ENV_VAR: NULL
     CI_BOOL_ENV_VAR: false

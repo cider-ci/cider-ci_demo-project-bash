@@ -2,10 +2,10 @@ _cider-ci_include: .cider-ci/shared/defaults.yml
 
 task-defaults:
 
-  exclusive_resources:
+  exclusive-resources:
     "/tmp/timestamps.log": true
    
-  trial_attachments:
+  trial-attachments:
     logs:
       glob: /tmp/timestamp.log
       content-type: text/plain
