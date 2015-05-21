@@ -5,8 +5,6 @@ jobs:
     This job demonstrates the usage of the `tree-attachments` and
     `trial-attachments` directive.  It creates a file which is then attached
     as a tree- as well as a trial-attachment. 
-  _cider-ci_include: 
-    - .cider-ci/jobs/attachments_demo.yml
 
 - name: Contexts Demo
   description:
@@ -94,7 +92,7 @@ jobs:
     scripts:
       main:
         body: bash -c $CIDER_CI_TASK_FILE
-  _cider-ci_expand-to-tasks: 
+  _cider-ci_generate-tasks: 
     include-match: specs/.*_spec.sh
 
 - name: Timeout Demo
