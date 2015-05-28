@@ -1,13 +1,13 @@
 _cider-ci_include: .cider-ci/shared/defaults.yml
 
-triggers: 
-- type: branch.updated
-  include-match: ^trigger-prerequisite$
+start-on: 
+  branch-name_trigger-prerequisite:
+    type: branch.updated
+    include-match: ^trigger-prerequisite$
 
 tasks: 
-- name: Sleep
-  scripts:
-    main: 
-      body: sleep 3 && echo "done sleeping" 
-
-
+  sleep:
+    name: Sleep
+    scripts:
+      main: 
+        body: sleep 3 && echo "done sleeping" 

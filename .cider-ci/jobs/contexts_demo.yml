@@ -8,42 +8,52 @@ task-defaults:
      MOON: Moon
   
 tasks: 
-- name: Earth check
-  scripts: 
-  - body: |
-      test $STAR = 'Sun'  \
-      && test $PLANET = 'Earth' \
-      && test $MOON = 'Moon' 
+
+  earth-check:
+    name: Earth Check
+    scripts: 
+      main:
+        body: |
+          test $STAR = 'Sun'  \
+          && test $PLANET = 'Earth' \
+          && test $MOON = 'Moon' 
 
 subcontexts: 
 
+  jupiter:
 
-  - name: Jupiter 
+    name: Jupiter 
 
     task-defaults: 
       environment-variables:
         PLANET: Jupiter
 
     tasks: 
-    - name: Jupiter check
-      scripts: 
-      - body: |
-          test $STAR = 'Sun'  \
-          && test $PLANET = 'Jupiter'
+      jupiter-check:
+        name: Jupiter Check
+        scripts: 
+          main:
+            body: |
+              test $STAR = 'Sun'  \
+              && test $PLANET = 'Jupiter'
 
     subcontexts: 
 
-    - name: Io
+      io:
 
-      task-defaults: 
-        environment-variables:
-          MOON: Io
+        name: Io
 
-      tasks: 
-      - name: Io check
-        scripts: 
-        - body: |
-            test $STAR = 'Sun'  \
-            && test $PLANET = 'Jupiter' \
-            && test $MOON = 'Io' 
+        task-defaults: 
+          environment-variables:
+            MOON: Io
+
+        tasks: 
+          io-check:
+            name: Io Check
+            scripts: 
+              main:
+                body: |
+                  test $STAR = 'Sun'  \
+                  && test $PLANET = 'Jupiter' \
+                  && test $MOON = 'Io' 
 

@@ -20,8 +20,10 @@ task-defaults:
         echo "$CIDER_CI_TASK_ID $CIDER_CI_TRIAL_ID - END $(date)"  >> /tmp/timestamp.log
 
 tasks: 
-  Task1: 
+
+  task1: 
     name: Task1 - write timestamps 
-  Task2: 
+
+  task2: 
     name: Task2 - write timestamps 
 

@@ -2,25 +2,27 @@ _cider-ci_include: .cider-ci/shared/defaults.yml
 
 tasks: 
 
-- name: Attachments Demo
+  attachments-demo: 
 
-  trial-attachments:
-    logs:
-      glob: tmp/*trial*.txt 
-      content-type: text/plain
+    name: Attachments Demo
 
-  tree-attachments:
-    logs:
-      glob: tmp/*tree*.txt 
-      content-type: text/plain
+    trial-attachments:
+      logs:
+        glob: tmp/*trial*.txt 
+        content-type: text/plain
 
-  scripts:
-    trial-attachment:
-      body: >
-        mkdir -p tmp &&
-        echo 'I am a trial attachment!' > tmp/a-trial-attachment.txt
-    tree-attachment:
-      body: >
-        mkdir -p tmp &&
-        echo 'I am a tree attachment!' > tmp/a-tree-attachment.txt
+    tree-attachments:
+      logs:
+        glob: tmp/*tree*.txt 
+        content-type: text/plain
+
+    scripts:
+      trial-attachment:
+        body: >
+          mkdir -p tmp &&
+          echo 'I am a trial attachment!' > tmp/a-trial-attachment.txt
+      tree-attachment:
+        body: >
+          mkdir -p tmp &&
+          echo 'I am a tree attachment!' > tmp/a-tree-attachment.txt
 

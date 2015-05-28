@@ -2,18 +2,20 @@ _cider-ci_include: .cider-ci/shared/defaults.yml
 
 tasks: 
 
-- name: Fail with 7:1
+  retry-fail:
 
-  eager-trials: 4
+    name: Fail with 7:1
 
-  max-auto-trials: 10
+    eager-trials: 4
 
-  scripts:
-    main:
-      body: | 
-        #!/usr/bin/env bash
-        RES=$((RANDOM % 9))
-        echo "exit value $RES"
-        sleep $((RANDOM % 10))
-        exit $RES
+    max-auto-trials: 10
+
+    scripts:
+      main:
+        body: | 
+          #!/usr/bin/env bash
+          RES=$((RANDOM % 9))
+          echo "exit value $RES"
+          sleep $((RANDOM % 10))
+          exit $RES
 

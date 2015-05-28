@@ -11,27 +11,31 @@ task-defaults:
 
 tasks: 
 
-- name: Verify that file in submodule does exist
-  scripts: 
-    main: 
-      body: test -f submodule/README.mkd
+  submodule-exists:
+    name: Verify that file in submodule does exist
+    scripts: 
+      main: 
+        body: test -f submodule/README.mkd
 
-- name: List submodule directory
-  scripts: 
-    main: 
-      body: 
-        ls -lah submodule 
+  ls-dir:
+    name: List submodule directory
+    scripts: 
+      main: 
+        body: 
+          ls -lah submodule 
 
-- name: Verify proper commit in submodule directory 
-  scripts: 
-    main: 
-      body: cd submodule && test $(git log -n 1 --pretty='%H') == cec555fbe7b525c61c53f5233e4af4d4325732ea
+  verify-commit:
+    name: Verify proper commit in submodule directory 
+    scripts: 
+      main: 
+        body: cd submodule && test $(git log -n 1 --pretty='%H') == cec555fbe7b525c61c53f5233e4af4d4325732ea
 
-- name: Verify that file in submodule does not exist if clone is False
-  git-options: 
-    submodules: 
-      clone: False
-  scripts: 
-    main: 
-      body: test ! -f submodule/README.mkd
+  verify-no-clone:
+    name: Verify that file in submodule does not exist if clone is False
+    git-options: 
+      submodules: 
+        clone: False
+    scripts: 
+      main: 
+        body: test ! -f submodule/README.mkd
 

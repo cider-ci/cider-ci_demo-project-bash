@@ -2,24 +2,28 @@ _cider-ci_include: .cider-ci/shared/defaults.yml
 
 tasks: 
 
-- name: List the Top Level Project Directory
-  scripts: 
-    main:
-      body: ls -lah
+  ls: 
+    name: List the Top Level Project Directory
+    scripts: 
+      main:
+        body: ls -lah
 
-- name: Show Declared Functions 
-  scripts:
-    main:
-      body: declare -F | sort
+  declare:
+    name: Show Declared Functions 
+    scripts:
+      main:
+        body: declare -F | sort
 
-- name: List Environment Variables
-  scripts:
-    main:
-      body: env | sort 
+  env:
+    name: List Environment Variables
+    scripts:
+      main:
+        body: env | sort 
 
-- name: Show the Last Three Commits 
-  scripts: 
-    main:
-      body: git log -n3 
+  git-log:
+    name: Show the Last Three Commits 
+    scripts: 
+      main:
+        body: git log -n3 
 
 

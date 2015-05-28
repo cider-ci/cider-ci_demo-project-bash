@@ -6,18 +6,20 @@ task-defaults:
 
 tasks: 
 
-- name: Ports Demo 
+  ports:
 
-  description: This task demonstrates the `ports` property. 
+    name: Ports Demo 
 
-  ports: 
-    XVNC_PORT: 
-      inet_address: "localhost"
-      min: 5900
-      max: 5999
+    description: This task demonstrates the `ports` property. 
 
-  scripts:
-    list:
-      body: env | sort  
-    test:
-      body: echo ${XVNC_PORT? "XVNC_PORT is not set!"}
+    ports: 
+      XVNC_PORT: 
+        inet_address: "localhost"
+        min: 5900
+        max: 5999
+
+    scripts:
+      list:
+        body: env | sort  
+      test:
+        body: echo ${XVNC_PORT? "XVNC_PORT is not set!"}
