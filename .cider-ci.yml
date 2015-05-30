@@ -40,6 +40,10 @@ jobs:
       for starting and termination. 
     _cider-ci_include: .cider-ci/jobs/script_dependencies_demo.yml
 
+  scripts-exclusive-resources:
+    name: Script Exclusive Executor Resources 
+    _cider-ci_include: .cider-ci/jobs/script_exclusive_resources_demo.yml
+
   retry:
     name: Retry and Eager Demo
     decription: |
