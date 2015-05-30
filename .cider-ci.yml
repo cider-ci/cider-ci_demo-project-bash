@@ -17,7 +17,7 @@ jobs:
     _cider-ci_include: .cider-ci/jobs/contexts_demo.yml
 
   job-depends:
-    name: Job Dependencies and Triggers - Depends 
+    name: Jobs - Dependencies and Triggers - Dependent
     description: |
       This demo can only be started if the "Job Dependencies and Triggers -
       Prerequisite" has passed. There is also a corresponding trigger defined for
@@ -26,7 +26,7 @@ jobs:
     _cider-ci_include: .cider-ci/jobs/depends.yml
 
   job-prerequisite:
-    name: Job Dependencies and Triggers - Prerequisite 
+    name: Jobs - Dependencies and Triggers - Prerequisite 
     description: |
       This one serves as a prerequisite to "Job Dependencies and Triggers - Depends".
       Additionally it will be automatically triggered if a branch matching the
@@ -34,7 +34,7 @@ jobs:
     _cider-ci_include: .cider-ci/jobs/prerequisite.yml
 
   scripts-dependencies:
-    name: Script Dependencies - Starting and Termination Demo
+    name: Script Dependencies
     description: |
       This job demonstrates scripts that are defined to depend on each other
       for starting and termination. 

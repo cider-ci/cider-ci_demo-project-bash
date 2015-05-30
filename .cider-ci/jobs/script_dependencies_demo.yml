@@ -35,8 +35,7 @@ tasks:
         name: unmet-dependency
         body: echo $(date) && sleep 1 && echo $(date) && test a = b
         start-when:
-          "1":
-            script-key: script-root
+        - script: root
 
   skip-but-ignore:
     name: Skip but ignore 
@@ -49,8 +48,7 @@ tasks:
         body: echo $(date) && sleep 1 && echo $(date) && test a = b
         ignore-state: true
         start-when:
-          "1":
-            name: script-root
+        - script: root
 
   comprehensive:
     name: Comprehensive
@@ -60,32 +58,24 @@ tasks:
       root: 
         name: Root
 
-      start-when-root-passed: 
-        start-when:
-          "1":
-            script-key: root
-
       failing:
         name: Failing
         body: echo $(date) && sleep 1 && echo $(date) && test a = b
         ignore-state: true
         start-when:
-          "1": 
-            script-key: root
+        - script: root
 
       start-when-failing-passed:
         name: Start when "failing" passed
         ignore-state: true
         start-when:
-          "1": 
-            script-key: script-failing
+        - script: script-failing
 
       start-when-failing-failed:
         name: Start when "failing" failed
         start-when:
-          "1": 
-            script-key: failing
-            states: [failed]
+        - script: failing
+          states: [failed]
 
   termination:
     name: Termination 
@@ -98,13 +88,11 @@ tasks:
         timeout: 20
         body: sleep 15
         start-when:
-          "1":
-            script-key: initial
-            states: [executing]
+        - script: initial
+          states: [executing]
         terminate-when:
-          "1":
-            script-key: initial
-            states: [passed, failed, skipped]
+        - script: initial
+          states: [passed, failed, skipped]
 
   skipping:
     name: Start on Skipped
@@ -120,13 +108,11 @@ tasks:
         body: exit 0
         ignore-state: true
         start-when:
-          "1":
-            script-key: initial
-            states: [failed]
+        - script: initial
+          states: [failed]
       when-skipped: 
         body: exit 0
         name: When "Never Satisfied" Skipped
         start-when:
-          "1":
-            script-key: never-satisfied
-            states: [skipped]
+        - script: never-satisfied
+          states: [skipped]

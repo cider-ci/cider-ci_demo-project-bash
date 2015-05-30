@@ -1,9 +1,8 @@
 _cider-ci_include: .cider-ci/shared/defaults.yml
 
 start-on: 
-  branch-name_trigger-prerequisite:
-    type: branch.updated
-    include-match: ^trigger-prerequisite$
+- type: branch.updated
+  include-match: ^trigger-prerequisite$
 
 tasks: 
   sleep:

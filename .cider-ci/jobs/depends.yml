@@ -8,15 +8,11 @@ tasks:
         body: sleep 3 && echo "done sleeping" 
 
 dependencies:
-
-  '1':
-    type: job
-    job-key: job-prerequisite
-    states: [passed]
+- type: job
+  job: job-prerequisite
+  states: [passed]
 
 start-on: 
-
-  '1':
-    type: job.updated
-    job-key: job-prerequisite
-    states: [passed]
+- type: job.updated
+  job: job-prerequisite
+  states: [passed]
