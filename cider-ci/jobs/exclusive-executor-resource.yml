@@ -1,0 +1,44 @@
+jobs:
+
+  exclusive-executor-resource:
+    name: Script Exclusive Executor Resources 
+
+    context:
+
+      script-defaults: 
+
+        exclusive-executor-resource: "/tmp/exclusive-executor-resource.log"
+
+        body: | 
+          echo "$CIDER_CI_TASK_ID $CIDER_CI_TRIAL_ID - START $(date)"  >> /tmp/exclusive-executor-resource.log
+          sleep 2
+          echo "$CIDER_CI_TASK_ID $CIDER_CI_TRIAL_ID - MIDDLE $(date)"  >> /tmp/exclusive-executor-resource.log
+          sleep 2
+          echo "$CIDER_CI_TASK_ID $CIDER_CI_TRIAL_ID - END $(date)"  >> /tmp/exclusive-executor-resource.log
+
+
+      task-defaults:
+
+        traits:
+          linux: true
+          bash: true
+
+        trial-attachments:
+          logs:
+            glob: /tmp/exclusive-executor-resource.log
+            content-type: text/plain
+
+      tasks: 
+
+        task1:
+          scripts: 
+            s1: {}
+            s2: {}
+            s3: {}
+
+        task2:
+          scripts: 
+            s1: {}
+            s2: {}
+            s3: {}
+

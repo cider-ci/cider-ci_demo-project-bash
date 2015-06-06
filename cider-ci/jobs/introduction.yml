@@ -1,0 +1,24 @@
+jobs:
+
+  intro-demo:
+    name: Introduction Demo and Example
+
+    context:
+
+      tasks: 
+
+        example-task: 
+          name: Example Task
+
+          traits: 
+            linux: true
+            bash: true
+
+          scripts:
+
+            equality: 
+              name: Equality Test
+
+              body: |
+                #!/usr/bin/env bash
+                test a = a

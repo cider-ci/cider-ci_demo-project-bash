@@ -1,0 +1,35 @@
+jobs: 
+
+  retry:
+
+    name: Retry and Eager Demo
+    decription: |
+      This is a job with probabilistic outcome. The task in this job succeeds
+      with probability 1/7. We try eagerly with 4 trials and retry up to 10
+      times. The total probability of success for the job is hence about 79%.
+
+    context:
+
+      tasks: 
+
+        retry-fail:
+
+          name: Fail with 7:1
+
+          traits:
+            linux: true
+            bash: true
+
+          eager-trials: 4
+
+          max-auto-trials: 10
+
+          scripts:
+            main:
+              body: | 
+                #!/usr/bin/env bash
+                RES=$((RANDOM % 9))
+                echo "exit value $RES"
+                sleep $((RANDOM % 10))
+                exit $RES
+

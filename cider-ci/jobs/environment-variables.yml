@@ -1,0 +1,31 @@
+jobs:
+
+  environment-variables:
+    name: Environment Variables Demo
+    description: |
+      This job Demonstrates the usage of the `environment-variables`
+      directive.  It specifies a tasks which lists the environment variables
+      with `env | sort`. 
+
+    context:
+
+      task-defaults:
+        environment-variables:
+          CI_TASK_DEFAULTS: "Inherited!"
+        traits:
+          linux: true
+          bash: true
+
+      tasks: 
+
+        env-vars:
+
+          name: Set and Show Environment Variables
+          environment-variables:
+            CI_THE_ANSWER: 42
+            CI_NULL_ENV_VAR: NULL
+            CI_BOOL_ENV_VAR: false
+          scripts:
+            main:
+              body: env | sort 
+

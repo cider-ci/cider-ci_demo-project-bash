@@ -1,0 +1,45 @@
+jobs:
+
+  exclusive-resources:
+    name: Exclusive Resources Demo
+    description: |
+      This job demonstrates the `exclusive-resources` directive.
+      Two tasks declare exclusive access to `/tmp/timestamps.log`.  The
+      `eager-trials` directive is used to generate effectively four trials.  At
+      any time at **most one** trial is _executing_. This can be verified by
+      the timestamps in the attachments. 
+
+
+    context: 
+
+      task-defaults:
+
+        traits:
+          linux: true
+          bash: true
+
+        exclusive-global-resources:
+          "/tmp/timestamps.log": true
+         
+        trial-attachments:
+          logs:
+            glob: /tmp/timestamp.log
+            content-type: text/plain
+
+        scripts: 
+          main: 
+            body: | 
+              echo "$CIDER_CI_TASK_ID $CIDER_CI_TRIAL_ID - START $(date)"  >> /tmp/timestamp.log
+              sleep 5
+              echo "$CIDER_CI_TASK_ID $CIDER_CI_TRIAL_ID - MIDDLE $(date)"  >> /tmp/timestamp.log
+              sleep 5
+              echo "$CIDER_CI_TASK_ID $CIDER_CI_TRIAL_ID - END $(date)"  >> /tmp/timestamp.log
+
+      tasks: 
+
+        task1: 
+          name: Task1 - write timestamps 
+
+        task2: 
+          name: Task2 - write timestamps 
+

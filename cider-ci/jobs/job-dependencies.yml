@@ -1,0 +1,62 @@
+jobs:
+
+  job-prerequisite:
+
+    name: Jobs - Dependencies and Triggers - Prerequisite 
+    description: |
+      This one serves as a prerequisite to "job-depends".
+      Additionally it will be automatically triggered if a branch matching the
+      regular expression /^trigger-prerequisite$/ is updated. 
+
+    start-on: 
+    - type: branch.updated
+      include-match: ^trigger-prerequisite$
+
+    context:
+
+      tasks: 
+
+        sleep:
+          name: Sleep
+
+          traits:
+            linux: true
+            bash: true
+
+          scripts:
+            main: 
+              body: sleep 3 && echo "done sleeping" 
+
+
+  job-dependent:
+
+    name: Jobs - Dependencies and Triggers - Dependent
+    description: |
+      This demo can only be started if the "job-prerequisite" has passed. There
+      is also a corresponding trigger defined for the sake of demonstration. 
+
+    depends-on:
+    - type: job
+      job: job-prerequisite
+      states: [passed]
+
+    start-on: 
+    - type: job.updated
+      job: job-prerequisite
+      states: [passed]
+
+    context:
+
+      tasks: 
+
+        sleep:
+
+          name: Sleep
+
+          traits:
+            linux: true
+            bash: true
+
+          scripts:
+            main: 
+              body: sleep 3 && echo "done sleeping" 

@@ -1,0 +1,38 @@
+info:
+  name: Show Infos
+  description: |
+    This job runs a few tasks which show various information, e.g.
+    `ls`, `git log`, ...
+  _cider-ci_include: .cider-ci/jobs/info_demo.yml
+
+submodules:
+  name: Submodule Demo
+  description: |
+    This job demonstrates  the usage of the `git-options`/`submodule`
+    specification.  It also checks some properties fails if they 
+    the feature would not work as expected. 
+  _cider-ci_include: .cider-ci/jobs/submodule_demo.yml
+
+timeout:
+  name: Timeout Demo
+  description: |
+    This job has one task which will fail because it times out 
+    and one that will pass.
+  _cider-ci_include: .cider-ci/jobs/timeout_demo.yml
+
+
+
+### prototypes 
+
+task-generator:
+  name: Task Generator Demo
+  description: | 
+    This is proposal a file based task generator. The functionality might
+    change and is not part of version 3 of Cider-CI. 
+  task-defaults:
+    scripts:
+      main:
+        body: bash -c $CIDER_CI_TASK_FILE
+  _cider-ci_generate-tasks: 
+    include-match: specs/.*_spec.sh
+

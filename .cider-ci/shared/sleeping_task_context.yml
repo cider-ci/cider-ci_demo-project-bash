@@ -1,7 +1,0 @@
-tasks:
-  sleep:
-    name: Sleep
-    scripts:
-      main: 
-        body: sleep 10 && echo "done sleeping" 
-

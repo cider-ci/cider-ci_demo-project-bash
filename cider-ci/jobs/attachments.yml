@@ -1,0 +1,40 @@
+jobs: 
+  attachments:
+    name: Attachments Demo
+    description: |
+      This job demonstrates the usage of the `tree-attachments` and
+      `trial-attachments` directive.  It creates a file which is then attached
+      as a tree- as well as a trial-attachment. 
+
+    context:
+
+      tasks: 
+
+        attachments-demo: 
+
+          name: Attachments Demo
+
+          traits:
+            linux: true
+            bash: true
+
+          trial-attachments:
+            logs:
+              glob: tmp/*trial*.txt 
+              content-type: text/plain
+
+          tree-attachments:
+            logs:
+              glob: tmp/*tree*.txt 
+              content-type: text/plain
+
+          scripts:
+            trial-attachment:
+              body: >
+                mkdir -p tmp &&
+                echo 'I am a trial attachment!' > tmp/a-trial-attachment.txt
+            tree-attachment:
+              body: >
+                mkdir -p tmp &&
+                echo 'I am a tree attachment!' > tmp/a-tree-attachment.txt
+

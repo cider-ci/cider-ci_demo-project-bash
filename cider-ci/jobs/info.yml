@@ -1,0 +1,42 @@
+jobs:
+
+  info:
+    name: Show Infos
+    description: |
+      This job runs a few tasks which show various information, e.g.
+      `ls`, `git log`, ...
+
+    context:
+
+      tasks: 
+
+        ls: 
+          name: List the Top Level Project Directory
+          scripts: 
+            main:
+              body: ls -lah
+
+        declare:
+          name: Show Declared Functions 
+          scripts:
+            main:
+              body: declare -F | sort
+
+        env:
+          name: List Environment Variables
+          scripts:
+            main:
+              body: env | sort 
+
+        git-log:
+          name: Show the Last Three Commits 
+          scripts: 
+            main:
+              body: git log -n3 
+
+      task-defaults:
+        traits:
+          linux: true
+          bash: true
+
+

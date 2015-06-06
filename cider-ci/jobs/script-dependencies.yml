@@ -1,0 +1,130 @@
+jobs:
+
+  scripts-dependencies:
+    name: Script Dependencies
+    description: |
+      This job demonstrates scripts that are defined to depend on each other
+      for starting and termination. 
+
+    context:
+
+      script-defaults: 
+        body: echo $(date) && sleep 1 && echo $(date) && test a = a
+      task-defaults:
+        traits:
+          linux: true
+          bash: true
+
+      tasks:
+
+        fail: 
+          name: Fail
+          description: |
+            This tasks has one script which will fail, hence the task will fail. 
+          scripts: 
+            fail:
+              name: Failing script
+              body: echo $(date) && sleep 1 && echo $(date) && test a = b
+
+
+        fail-but-ignore:
+          name: Fail but ignore
+          description: |
+            This tasks has one script which will fail but is ignored, hence the task succeeds. 
+          scripts: 
+            fail:
+              name: script-failing
+              body: echo $(date) && sleep 1 && echo $(date) && test a = b
+              ignore-state: true
+
+        skip:
+          name: Skip
+          description: |
+            This tasks has one script which will be skipped because the dependency
+            is never met, hence the task should fail.
+          scripts: 
+            skipped:
+              name: unmet-dependency
+              body: echo $(date) && sleep 1 && echo $(date) && test a = b
+              start-when:
+              - script: root
+
+        skip-but-ignore:
+          name: Skip but ignore 
+          description: |
+            This tasks has one script which will be skipped because the dependency
+            is never met. However it is ignored and hence the task should pass.
+          scripts: 
+            skipped:
+              name: unmet-dependency
+              body: echo $(date) && sleep 1 && echo $(date) && test a = b
+              ignore-state: true
+              start-when:
+              - script: root
+
+        comprehensive:
+          name: Comprehensive
+          description: |
+            This tasks shows all the preceding features.
+          scripts:
+            root: 
+              name: Root
+
+            failing:
+              name: Failing
+              body: echo $(date) && sleep 1 && echo $(date) && test a = b
+              ignore-state: true
+              start-when:
+              - script: root
+
+            start-when-failing-passed:
+              name: Start when "failing" passed
+              ignore-state: true
+              start-when:
+              - script: script-failing
+
+            start-when-failing-failed:
+              name: Start when "failing" failed
+              start-when:
+              - script: failing
+                states: [failed]
+
+        termination:
+          name: Termination 
+          scripts: 
+            initial:
+              name: Initial
+              body: sleep 5
+            terminated:
+              name: Terminate when initial finished
+              timeout: 20
+              body: sleep 15
+              start-when:
+              - script: initial
+                states: [executing]
+              terminate-when:
+              - script: initial
+                states: [passed, failed, skipped]
+
+        skipping:
+          name: Start on Skipped
+          description: |
+            This tasks demonstrate the eager setting of the skipped state
+            and an other script depending on this state. 
+          scripts: 
+            initial:
+              name: Initial
+              body: exit 0
+            never-satisfied: 
+              name: Never Satisfied 
+              body: exit 0
+              ignore-state: true
+              start-when:
+              - script: initial
+                states: [failed]
+            when-skipped: 
+              body: exit 0
+              name: When "Never Satisfied" Skipped
+              start-when:
+              - script: never-satisfied
+                states: [skipped]
