@@ -1,35 +1,37 @@
-ports:
-  name: Ports Demo
-  description: |
-    This job demonstrates the usage of the `ports` directive.  The
-    output of `env | sort` shows the assigned port as the value of the given
-    name.
+jobs: 
 
-  context:
+  ports:
+    name: Ports Demo
+    description: |
+      This job demonstrates the usage of the `ports` directive.  The
+      output of `env | sort` shows the assigned port as the value of the given
+      name.
 
-    task-defaults:
-      traits:
-        linux: true
-        bash: true
-      environment-variables:
-        CI_TASK_DEFAULTS: "Inherited!"
+    context:
 
-    tasks: 
+      task-defaults:
+        traits:
+          linux: true
+          bash: true
+        environment-variables:
+          CI_TASK_DEFAULTS: "Inherited!"
 
-      ports:
+      tasks: 
 
-        name: Ports Demo 
+        ports:
 
-        description: This task demonstrates the `ports` property. 
+          name: Ports Demo 
 
-        ports: 
-          XVNC_PORT: 
-            inet_address: "localhost"
-            min: 5900
-            max: 5999
+          description: This task demonstrates the `ports` property. 
 
-        scripts:
-          list:
-            body: env | sort  
-          test:
-            body: echo ${XVNC_PORT? "XVNC_PORT is not set!"}
+          ports: 
+            XVNC_PORT: 
+              inet_address: "localhost"
+              min: 5900
+              max: 5999
+
+          scripts:
+            list:
+              body: env | sort  
+            test:
+              body: echo ${XVNC_PORT? "XVNC_PORT is not set!"}

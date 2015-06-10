@@ -1,33 +1,35 @@
-result:
-  name: Result Demo
-  description: |
-    This job creates the specially treated `result.json` file with
-    `value`, and `summary` properties.  It also attaches the `result.json` by
-    the `trial-attachments` directive. 
+jobs:
 
-  context:
+  result:
+    name: Result Demo
+    description: |
+      This job creates the specially treated `result.json` file with
+      `value`, and `summary` properties.  It also attaches the `result.json` by
+      the `trial-attachments` directive. 
 
-    tasks:
+    context:
 
-      result: 
+      tasks:
 
-        name: Result Embedding Demo
+        result: 
 
-        description: >
-          This tasks creates a result.json file and demonstrates the embedding of
-          the contents as the result in script, and task.  The result property is
-          available in the job if and only if it contains exactly this task
-          and no further.  
+          name: Result Embedding Demo
 
-        traits:
-          linux: true
-          bash: true
+          description: >
+            This tasks creates a result.json file and demonstrates the embedding of
+            the contents as the result in script, and task.  The result property is
+            available in the job if and only if it contains exactly this task
+            and no further.  
 
-        trial-attachments:
-          result_file:
-            glob: result.json
-            content-type: application/json
+          traits:
+            linux: true
+            bash: true
 
-        scripts:
-          main: 
-            body: ./bin/create-result-json
+          trial-attachments:
+            result_file:
+              glob: result.json
+              content-type: application/json
+
+          scripts:
+            main: 
+              body: ./bin/create-result-json
