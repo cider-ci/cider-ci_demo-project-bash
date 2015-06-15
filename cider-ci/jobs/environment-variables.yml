@@ -12,6 +12,7 @@ jobs:
       task-defaults:
         environment-variables:
           CI_TASK_DEFAULTS: "Inherited!"
+          SOME_DEFAULT: "X"
         traits:
           linux: true
           bash: true
@@ -25,7 +26,24 @@ jobs:
             CI_THE_ANSWER: 42
             CI_NULL_ENV_VAR: NULL
             CI_BOOL_ENV_VAR: false
+
           scripts:
-            main:
+
+            show:
               body: env | sort 
+
+            test-task-env-vars: 
+              body: |
+                test ${CI_THE_ANSWER} == "42" 
+
+            test-inheritance: 
+              body: |
+                test ${SOME_DEFAULT} == "X" 
+
+            test-script-overrides: 
+              environment-variables:
+                SOME_DEFAULT: "Y"
+              body: |
+                test ${SOME_DEFAULT} == "Y" 
+
 
