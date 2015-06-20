@@ -1,4 +1,4 @@
-jobs: 
+jobs:
 
   retry:
 
@@ -10,7 +10,7 @@ jobs:
 
     context:
 
-      tasks: 
+      tasks:
 
         retry-fail:
 
@@ -26,7 +26,7 @@ jobs:
 
           scripts:
             main:
-              body: | 
+              body: |
                 #!/usr/bin/env bash
                 RES=$((RANDOM % 9))
                 echo "exit value $RES"

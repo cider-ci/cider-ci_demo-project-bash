@@ -3,11 +3,10 @@ Bash Demo Project for Cider-CI
 ==============================
 
 This is a demonstration project for [Cider-CI][]. Every task is based on
-a simple bash script. 
+a simple bash script.
 
-Almost all features of the Cider-CI dot-file [.cider-ci.yml](.cider-ci.yml) and
-the Cider-CI specification [.cider-ci/](.cider-ci/) are covered by the given
-examples.
+Almost all features of the Cider-CI dot-file [.cider-ci.yml](.cider-ci.yml) are
+covered by the given examples.
 
 
   [Cider-CI]: https://github.com/cider-ci/cider-ci

@@ -5,7 +5,7 @@ jobs:
     description: |
       This job Demonstrates the usage of the `environment-variables`
       directive.  It specifies a tasks which lists the environment variables
-      with `env | sort`. 
+      with `env | sort`.
 
     context:
 
@@ -17,7 +17,7 @@ jobs:
           linux: true
           bash: true
 
-      tasks: 
+      tasks:
 
         env-vars:
 
@@ -30,20 +30,20 @@ jobs:
           scripts:
 
             show:
-              body: env | sort 
+              body: env | sort
 
-            test-task-env-vars: 
+            test-task-env-vars:
               body: |
-                test ${CI_THE_ANSWER} == "42" 
+                test ${CI_THE_ANSWER} == "42"
 
-            test-inheritance: 
+            test-inheritance:
               body: |
-                test ${SOME_DEFAULT} == "X" 
+                test ${SOME_DEFAULT} == "X"
 
-            test-script-overrides: 
+            test-script-overrides:
               environment-variables:
                 SOME_DEFAULT: "Y"
               body: |
-                test ${SOME_DEFAULT} == "Y" 
+                test ${SOME_DEFAULT} == "Y"
 
 

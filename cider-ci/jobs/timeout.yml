@@ -3,14 +3,14 @@ jobs:
   timeout:
     name: Timeout Demo
     description: |
-      This job has one task which will fail because it times out 
+      This job has one task which will fail because it times out
       and one that will pass.
 
     context:
 
-      tasks: 
+      tasks:
 
-        pass: 
+        pass:
 
           name: Pass Timeout
 
@@ -19,13 +19,13 @@ jobs:
               timeout: 5
               body: sleep 1 && exit 0
 
-        fail: 
+        fail:
 
           name: Fail Timeout
 
           description: |
             We sleep much longer than the timeout allows. Cider-CI will terminate the
-            script with a appropriate method available for the given operating system. 
+            script with a appropriate method available for the given operating system.
 
           trial-attachments:
             logs:
@@ -37,7 +37,7 @@ jobs:
               timeout: 5
               body: |
                 #!/usr/bin/env bash
-                echo "MY PID $$" >> log.txt 
+                echo "MY PID $$" >> log.txt
                 sleep 100 &&  exit 0
 
 

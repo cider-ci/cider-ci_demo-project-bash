@@ -1,15 +1,15 @@
 jobs:
 
   exclusive-executor-resource:
-    name: Script Exclusive Executor Resources 
+    name: Script Exclusive Executor Resources
 
     context:
 
-      script-defaults: 
+      script-defaults:
 
         exclusive-executor-resource: "/tmp/exclusive-executor-resource.log"
 
-        body: | 
+        body: |
           echo "$CIDER_CI_TASK_ID $CIDER_CI_TRIAL_ID - START $(date)"  >> /tmp/exclusive-executor-resource.log
           sleep 2
           echo "$CIDER_CI_TASK_ID $CIDER_CI_TRIAL_ID - MIDDLE $(date)"  >> /tmp/exclusive-executor-resource.log
@@ -28,16 +28,16 @@ jobs:
             glob: /tmp/exclusive-executor-resource.log
             content-type: text/plain
 
-      tasks: 
+      tasks:
 
         task1:
-          scripts: 
+          scripts:
             s1: {}
             s2: {}
             s3: {}
 
         task2:
-          scripts: 
+          scripts:
             s1: {}
             s2: {}
             s3: {}

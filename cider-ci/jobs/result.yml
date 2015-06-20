@@ -5,13 +5,13 @@ jobs:
     description: |
       This job creates the specially treated `result.json` file with
       `value`, and `summary` properties.  It also attaches the `result.json` by
-      the `trial-attachments` directive. 
+      the `trial-attachments` directive.
 
     context:
 
       tasks:
 
-        result: 
+        result:
 
           name: Result Embedding Demo
 
@@ -19,7 +19,7 @@ jobs:
             This tasks creates a result.json file and demonstrates the embedding of
             the contents as the result in script, and task.  The result property is
             available in the job if and only if it contains exactly this task
-            and no further.  
+            and no further.
 
           traits:
             linux: true
@@ -31,5 +31,5 @@ jobs:
               content-type: application/json
 
           scripts:
-            main: 
+            main:
               body: ./bin/create-result-json

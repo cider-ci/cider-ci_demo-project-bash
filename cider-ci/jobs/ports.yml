@@ -1,4 +1,4 @@
-jobs: 
+jobs:
 
   ports:
     name: Ports Demo
@@ -16,22 +16,22 @@ jobs:
         environment-variables:
           CI_TASK_DEFAULTS: "Inherited!"
 
-      tasks: 
+      tasks:
 
         ports:
 
-          name: Ports Demo 
+          name: Ports Demo
 
-          description: This task demonstrates the `ports` property. 
+          description: This task demonstrates the `ports` property.
 
-          ports: 
-            XVNC_PORT: 
+          ports:
+            XVNC_PORT:
               inet_address: "localhost"
               min: 5900
               max: 5999
 
           scripts:
             list:
-              body: env | sort  
+              body: env | sort
             test:
               body: echo ${XVNC_PORT? "XVNC_PORT is not set!"}

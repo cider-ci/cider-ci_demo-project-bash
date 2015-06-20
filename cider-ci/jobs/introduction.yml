@@ -5,18 +5,18 @@ jobs:
 
     context:
 
-      tasks: 
+      tasks:
 
-        example-task: 
+        example-task:
           name: Example Task
 
-          traits: 
+          traits:
             linux: true
             bash: true
 
           scripts:
 
-            equality: 
+            equality:
               name: Equality Test
 
               body: |

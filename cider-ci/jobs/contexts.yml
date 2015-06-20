@@ -3,13 +3,13 @@ jobs:
   contexts-demo:
     name: Contexts Demo
     description:
-      This job demonstrates the use of contexts and the inheritance 
-      of `task-defaults` e.g. from the top level context to its 
-      subcontexts. 
+      This job demonstrates the use of contexts and the inheritance
+      of `task-defaults` e.g. from the top level context to its
+      subcontexts.
 
-    context: 
+    context:
 
-      task-defaults: 
+      task-defaults:
         traits:
           linux: true
           bash: true
@@ -17,54 +17,54 @@ jobs:
            STAR: Sun
            PLANET: Earth
            MOON: Moon
-        
-      tasks: 
+
+      tasks:
 
         earth-check:
           name: Earth Check
-          scripts: 
+          scripts:
             main:
               body: |
                 test $STAR = 'Sun'  \
                 && test $PLANET = 'Earth' \
-                && test $MOON = 'Moon' 
+                && test $MOON = 'Moon'
 
-      subcontexts: 
+      subcontexts:
 
         jupiter:
 
-          name: Jupiter 
+          name: Jupiter
 
-          task-defaults: 
+          task-defaults:
             environment-variables:
               PLANET: Jupiter
 
-          tasks: 
+          tasks:
             jupiter-check:
               name: Jupiter Check
-              scripts: 
+              scripts:
                 main:
                   body: |
                     test $STAR = 'Sun'  \
                     && test $PLANET = 'Jupiter'
 
-          subcontexts: 
+          subcontexts:
 
             io:
 
               name: Io
 
-              task-defaults: 
+              task-defaults:
                 environment-variables:
                   MOON: Io
 
-              tasks: 
+              tasks:
                 io-check:
                   name: Io Check
-                  scripts: 
+                  scripts:
                     main:
                       body: |
                         test $STAR = 'Sun'  \
                         && test $PLANET = 'Jupiter' \
-                        && test $MOON = 'Io' 
+                        && test $MOON = 'Io'
 

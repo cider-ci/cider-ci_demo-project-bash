@@ -8,16 +8,16 @@ jobs:
 
     context:
 
-      tasks: 
+      tasks:
 
-        ls: 
+        ls:
           name: List the Top Level Project Directory
-          scripts: 
+          scripts:
             main:
               body: ls -lah
 
         declare:
-          name: Show Declared Functions 
+          name: Show Declared Functions
           scripts:
             main:
               body: declare -F | sort
@@ -26,13 +26,13 @@ jobs:
           name: List Environment Variables
           scripts:
             main:
-              body: env | sort 
+              body: env | sort
 
         git-log:
-          name: Show the Last Three Commits 
-          scripts: 
+          name: Show the Last Three Commits
+          scripts:
             main:
-              body: git log -n3 
+              body: git log -n3
 
       task-defaults:
         traits:
