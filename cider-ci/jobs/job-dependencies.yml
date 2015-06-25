@@ -8,8 +8,8 @@ jobs:
       Additionally it will be automatically triggered if a branch matching the
       regular expression /^trigger-prerequisite$/ is updated.
 
-    start-on:
-    - type: branch.updated
+    run-on:
+    - type: branch
       include-match: ^trigger-prerequisite$
 
     context:
@@ -40,8 +40,8 @@ jobs:
       job: job-prerequisite
       states: [passed]
 
-    start-on:
-    - type: job.updated
+    run-on:
+    - type: job
       job: job-prerequisite
       states: [passed]
 
