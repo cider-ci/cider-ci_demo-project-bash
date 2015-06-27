@@ -8,6 +8,7 @@ _cider-ci_include:
   - cider-ci/jobs/environment-variables.yml
   - cider-ci/jobs/exclusive-executor-resource.yml
   - cider-ci/jobs/exclusive-global-resources.yml
+  - cider-ci/jobs/generate-tasks.yml
   - cider-ci/jobs/git-submodules.yml
   - cider-ci/jobs/info.yml
   - cider-ci/jobs/introduction.yml
@@ -16,20 +17,3 @@ _cider-ci_include:
   - cider-ci/jobs/result.yml
   - cider-ci/jobs/script-dependencies.yml
   - cider-ci/jobs/timeout.yml
-
-### prototypes
-
-jobs:
-
-  task-generator:
-    name: Task Generator Demo
-    description: |
-      This is proposal a file based task generator. The functionality might
-      change and is not part of version 3 of Cider-CI.
-    task-defaults:
-      scripts:
-        main:
-          body: bash -c $CIDER_CI_TASK_FILE
-    _cider-ci_generate-tasks:
-      include-match: specs/.*_spec.sh
-

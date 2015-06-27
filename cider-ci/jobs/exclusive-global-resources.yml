@@ -1,14 +1,20 @@
 jobs:
 
   exclusive-resources:
-    name: Exclusive Resources Demo
-    description: |
-      This job demonstrates the `exclusive-resources` directive.
-      Two tasks declare exclusive access to `/tmp/timestamps.log`.  The
-      `eager-trials` directive is used to generate effectively four trials.  At
-      any time at **most one** trial is _executing_. This can be verified by
-      the timestamps in the attachments.
 
+    name: Exclusive Global Resources Demo
+
+    description: |
+      This job demonstrates the `exclusive-global-resources` directive. At a
+      given time at most one trial will be executing for every exclusive global
+      resource. This spans over multiple tasks, and even jobs as the name
+      global suggests.
+
+    # This is a demo and test. The test is only reliable when there is
+    # exactly one executor which has more than one slot and no other trial
+    # is run in parallel. This is true for our integration tests. There can
+    # be false positives in other configurations, i.e. the tests yields
+    # passed but the feature is broken.
 
     context:
 
@@ -19,27 +25,24 @@ jobs:
           bash: true
 
         exclusive-global-resources:
-          "/tmp/timestamps.log": true
-
-        trial-attachments:
-          logs:
-            glob: /tmp/timestamp.log
-            content-type: text/plain
+          "/tmp/_cider-ci_some-global-resource.lock": true
 
         scripts:
-          main:
+          test:
             body: |
-              echo "$CIDER_CI_TASK_ID $CIDER_CI_TRIAL_ID - START $(date)"  >> /tmp/timestamp.log
-              sleep 5
-              echo "$CIDER_CI_TASK_ID $CIDER_CI_TRIAL_ID - MIDDLE $(date)"  >> /tmp/timestamp.log
-              sleep 5
-              echo "$CIDER_CI_TASK_ID $CIDER_CI_TRIAL_ID - END $(date)"  >> /tmp/timestamp.log
-
+              #!/usr/bin/env bash
+              sleep 1 \
+              && test ! -f  "/tmp/_cider-ci_some-global-resource.lock" \
+              && echo $$ > "/tmp/_cider-ci_some-global-resource.lock"  \
+              && test -f  "/tmp/_cider-ci_some-global-resource.lock" \
+              && test $$ = $(<"/tmp/_cider-ci_some-global-resource.lock") \
+              && sleep 3 \
+              && test $$ = $(<"/tmp/_cider-ci_some-global-resource.lock") \
+              && rm "/tmp/_cider-ci_some-global-resource.lock"
       tasks:
 
         task1:
-          name: Task1 - write timestamps
+          name: Task1 - Set and test exclusive lock
 
         task2:
-          name: Task2 - write timestamps
-
+          name: Task2 - Set and test exclusive lock
