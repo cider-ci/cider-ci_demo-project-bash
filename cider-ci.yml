@@ -13,6 +13,7 @@ _cider-ci_include:
   - cider-ci/jobs/info.yml
   - cider-ci/jobs/introduction.yml
   - cider-ci/jobs/job-dependencies.yml
+  - cider-ci/jobs/json.json
   - cider-ci/jobs/ports.yml
   - cider-ci/jobs/result.yml
   - cider-ci/jobs/script-dependencies.yml

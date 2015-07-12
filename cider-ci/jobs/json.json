@@ -1,0 +1,24 @@
+{
+  "jobs": {
+    "json": {
+      "name": "JSON Demo",
+      "description": "The configuration for this job is written and included as json.\n",
+      "context": {
+        "tasks": {
+          "some-task": {
+            "name": "Some Task Written in JSON",
+            "traits": {
+              "linux": true,
+              "bash": true
+            },
+            "scripts": {
+              "main": {
+                "body": "test a = a"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
