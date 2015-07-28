@@ -41,7 +41,7 @@ jobs:
           name: Verify proper commit in submodule directory
           scripts:
             main:
-              body: cd submodule && test $(git log -n 1 --pretty='%H') == cec555fbe7b525c61c53f5233e4af4d4325732ea
+              body: cd submodule && test $(git log -n 1 --pretty='%H') == 3b69510478ea1d9858e949bdd196db5629aeb1da
 
         verify-no-clone:
           name: Verify that file in submodule does not exist if clone is False
