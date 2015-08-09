@@ -3,6 +3,7 @@
 # however complete environment.
 
 _cider-ci_include:
+  - cider-ci/jobs/abort_and_retry.yml
   - cider-ci/jobs/attachments.yml
   - cider-ci/jobs/contexts.yml
   - cider-ci/jobs/environment-variables.yml

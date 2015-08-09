@@ -1,0 +1,26 @@
+jobs:
+
+  aborting:
+
+    name: Abort and Retry Demo
+    description: |
+      This job is used for testing the 'abort and retry' feature.
+      It doesn't do much on its own.
+
+    context:
+
+      task-defaults:
+        exclusive-global-resources:
+          any: true
+        traits:
+          linux: true
+          bash: true
+        scripts:
+          main:
+            body: >
+              sleep 30
+
+      tasks:
+        t1: {}
+        t2: {}
+
