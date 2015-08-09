@@ -20,6 +20,8 @@ jobs:
 
       task-defaults:
 
+        max-auto-trials: 1
+
         traits:
           linux: true
           bash: true
@@ -36,7 +38,7 @@ jobs:
               && echo $$ > "/tmp/_cider-ci_some-global-resource.lock"  \
               && test -f  "/tmp/_cider-ci_some-global-resource.lock" \
               && test $$ = $(<"/tmp/_cider-ci_some-global-resource.lock") \
-              && sleep 3 \
+              && sleep 5 \
               && test $$ = $(<"/tmp/_cider-ci_some-global-resource.lock") \
               && rm "/tmp/_cider-ci_some-global-resource.lock"
       tasks:
