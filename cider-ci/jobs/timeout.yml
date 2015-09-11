@@ -38,8 +38,7 @@ jobs:
               body: |
                 #!/usr/bin/env bash
                 echo "MY PID $$" >> log.txt
-                sleep 100 &&  exit 0
-
+                sleep 15 && exit 0
 
 
       task-defaults:
