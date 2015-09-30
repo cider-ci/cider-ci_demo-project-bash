@@ -15,7 +15,6 @@ jobs:
           name: Attachments Demo
 
           traits:
-            linux: true
             bash: true
 
           trial-attachments:

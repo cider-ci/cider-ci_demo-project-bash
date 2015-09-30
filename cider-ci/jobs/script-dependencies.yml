@@ -12,7 +12,6 @@ jobs:
         body: echo $(date) && sleep 1 && echo $(date) && test a = a
       task-defaults:
         traits:
-          linux: true
           bash: true
 
       tasks:

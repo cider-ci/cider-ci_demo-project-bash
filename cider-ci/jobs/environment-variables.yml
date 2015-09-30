@@ -14,7 +14,6 @@ jobs:
           CI_TASK_DEFAULTS: "Inherited!"
           SOME_DEFAULT: "X"
         traits:
-          linux: true
           bash: true
 
       tasks:

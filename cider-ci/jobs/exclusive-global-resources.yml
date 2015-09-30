@@ -23,7 +23,6 @@ jobs:
         max-auto-trials: 1
 
         traits:
-          linux: true
           bash: true
 
         exclusive-global-resources:

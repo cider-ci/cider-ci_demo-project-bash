@@ -36,7 +36,7 @@ jobs:
 
       task-defaults:
         traits:
-          linux: true
+          git: true
           bash: true
 
 

@@ -17,7 +17,6 @@ jobs:
           name: Fail with 7:1
 
           traits:
-            linux: true
             bash: true
 
           eager-trials: 4

@@ -14,7 +14,6 @@ jobs:
         max-auto-trials: 2
 
         traits:
-          linux: true
           bash: true
 
         git-options:

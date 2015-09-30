@@ -22,7 +22,6 @@ jobs:
             and no further.
 
           traits:
-            linux: true
             bash: true
 
           trial-attachments:

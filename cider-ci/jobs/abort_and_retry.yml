@@ -13,7 +13,6 @@ jobs:
         exclusive-global-resources:
           any: true
         traits:
-          linux: true
           bash: true
         scripts:
           main:

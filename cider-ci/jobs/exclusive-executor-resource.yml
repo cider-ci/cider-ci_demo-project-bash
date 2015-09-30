@@ -20,7 +20,6 @@ jobs:
       task-defaults:
 
         traits:
-          linux: true
           bash: true
 
         trial-attachments:
