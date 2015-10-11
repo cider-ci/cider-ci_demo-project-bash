@@ -3,9 +3,14 @@ jobs:
   environment-variables:
     name: Environment Variables Demo
     description: |
-      This job Demonstrates the usage of the `environment-variables`
-      directive.  It specifies a tasks which lists the environment variables
-      with `env | sort`.
+      This job Demonstrates the usage of the `environment-variables` and
+      `environment-variables_process-templates` directive.
+
+      The _Set and Show_ subcontext demonstrates inheritance and runs
+      some basic tests.
+
+      The _Substitution_ subcontext demonstrates the usage of
+      `environment-variables_process-templates`.
 
     context:
 
@@ -13,36 +18,67 @@ jobs:
         environment-variables:
           CI_TASK_DEFAULTS: "Inherited!"
           SOME_DEFAULT: "X"
+          THE_ANSWER: 42
         traits:
           bash: true
 
-      tasks:
 
-        env-vars:
+      subcontexts:
 
-          name: Set and Show Environment Variables
-          environment-variables:
-            CI_THE_ANSWER: 42
-            CI_NULL_ENV_VAR: NULL
-            CI_BOOL_ENV_VAR: false
+        set_and_show:
 
-          scripts:
+          name: Set and Show
 
-            show:
-              body: env | sort
+          tasks:
 
-            test-task-env-vars:
-              body: |
-                test ${CI_THE_ANSWER} == "42"
+            show_and_test:
 
-            test-inheritance:
-              body: |
-                test ${SOME_DEFAULT} == "X"
+              name: Set and Show Environment Variables
 
-            test-script-overrides:
-              environment-variables:
-                SOME_DEFAULT: "Y"
-              body: |
-                test ${SOME_DEFAULT} == "Y"
+              scripts:
+
+                show:
+                  body: env | sort
+
+                test-task-env-vars:
+                  body: |
+                    test ${THE_ANSWER} = "42"
+
+                test-inheritance:
+                  body: |
+                    test ${SOME_DEFAULT} == "X"
+
+                test-script-overrides:
+                  environment-variables:
+                    SOME_DEFAULT: "Y"
+                  body: |
+                    test ${SOME_DEFAULT} == "Y"
+
+
+        substitution:
+
+          name: Substitution
+
+          tasks:
+
+            enabled-substitution:
+              name: "Enabled Substitution"
+              script-defaults:
+              scripts:
+                substitute_ci_var:
+                  environment-variables:
+                    THE_SUBSTITUTED_ANSWER: "{{THE_ANSWER}}"
+                  environment-variables_process-templates: true
+                  body: |
+                    test "${THE_SUBSTITUTED_ANSWER}" = 42
+
+            disabled-substitution:
+              name: "Disabled Substitution"
+              scripts:
+                substitute_ci_var:
+                  environment-variables:
+                    THE_SUBSTITUTED_ANSWER: "{{THE_ANSWER}}"
+                  body: |
+                    test "${THE_SUBSTITUTED_ANSWER}" = '{{THE_ANSWER}}'
 
 
