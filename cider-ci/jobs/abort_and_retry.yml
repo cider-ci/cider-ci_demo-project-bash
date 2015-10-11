@@ -16,8 +16,13 @@ jobs:
           bash: true
         scripts:
           main:
-            body: >
-              sleep 30
+            body: sleep 30
+          clean-up:
+            body: sleep 10
+            ignore-abort: true
+            start-when:
+              - script: main
+                states: [aborted, passed, failed, skipped]
 
       tasks:
         t1: {}
