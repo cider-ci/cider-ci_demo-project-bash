@@ -72,6 +72,29 @@ jobs:
                   body: |
                     test "${THE_SUBSTITUTED_ANSWER}" = 42
 
+            recursive-substitution:
+              name: "Recursive Substitution"
+              ports:
+                XVNC_PORT:
+                  inet_address: "localhost"
+                  min: 5900
+                  max: 5999
+              scripts:
+                substitute_ci_var:
+                  environment-variables:
+                    T1: "{{T2}}"
+                    T2: "{{T3}}"
+                    T3: 7
+                    P1: "{{XVNC_PORT}}"
+                    P2: "{{P1}}"
+                    P3: "{{P2}}"
+                  environment-variables_process-templates: true
+                  body: |
+                    set -eux
+                    test "${T1}" = 7
+                    test "${P3}" = "${XVNC_PORT}"
+                    test "${P3}_${T1}" = "${XVNC_PORT}_7"
+
             disabled-substitution:
               name: "Disabled Substitution"
               scripts:
