@@ -1,0 +1,73 @@
+jobs:
+  file_templates:
+    name: Templates
+    description: |
+      The job demonstrates file templates.
+
+    context:
+      tasks:
+        template:
+          name: "Simple Template"
+          description: |
+            This task demonstrates the usage of a very simple template.
+          environment-variables:
+            X: 42
+          templates:
+            - src: [cider-ci, templates, t1.yml]
+              dest: [t1.yml]
+          scripts:
+            test:
+              body: |
+                set -eux
+                test `openssl dgst -sha1 t1.yml | cut -d ' ' -f 2` = 7de84c6b3d527904ee7bec404af90d30048906ac
+
+        template_and_ports:
+          name: "Templates and Ports"
+          description: |
+            Ports are available in templates too.
+          ports:
+            PORT:
+              min: 6000
+              max: 6999
+          templates:
+            - src: [cider-ci, templates, port]
+              dest: [port]
+          scripts:
+            test:
+              body: |
+                set -eux
+                PORT_FROM_FILE=`<port`
+                test "${PORT_FROM_FILE}" = "${PORT}"
+
+        recursive_templating:
+          name: "Test Recursive Templating"
+          description: |
+            Templates are evaluated recursively
+            until the result doesn't change anymore.
+          environment-variables:
+            X2: '{{X3}}'
+            X: '{{X2}}'
+            X3: 42
+          templates:
+            - src: [cider-ci, templates, t1.yml]
+              dest: [t1.yml]
+          scripts:
+            test:
+              body: |
+                set -eux
+                test `openssl dgst -sha1 t1.yml | cut -d ' ' -f 2` = 7de84c6b3d527904ee7bec404af90d30048906ac
+
+        missing_template:
+          name: "Test Missing Template"
+          description: |
+            The script is never called if the template is missing
+            and the task fails.
+          templates:
+            - src: [cider-ci, templates, idontexist.yml]
+              dest: [t1.yml]
+          scripts:
+            test:
+              body: |
+                set -eux
+                test a = a
+

@@ -18,4 +18,5 @@ _cider-ci_include:
   - cider-ci/jobs/ports.yml
   - cider-ci/jobs/result.yml
   - cider-ci/jobs/script-dependencies.yml
+  - cider-ci/jobs/templates.yml
   - cider-ci/jobs/timeout.yml
