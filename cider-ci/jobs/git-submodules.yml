@@ -42,11 +42,31 @@ jobs:
             main:
               body: cd submodule && test $(git log -n 1 --pretty='%H') == 3b69510478ea1d9858e949bdd196db5629aeb1da
 
-        verify-no-clone:
+        test-clone-false:
           name: Verify that file in submodule does not exist if clone is False
           git-options:
             submodules:
               clone: False
+          scripts:
+            main:
+              body: test ! -f submodule/README.mkd
+
+        test-include-match:
+          name: Verify that file in submodule does not exist if clone is False
+          git-options:
+            submodules:
+              clone:
+                include-match: submodule
+          scripts:
+            main:
+              body: test -f submodule/README.mkd
+
+        test-exclude-match:
+          name: Verify that file in submodule does not exist if clone is False
+          git-options:
+            submodules:
+              clone:
+                exclude-match: submodule|or-whatever
           scripts:
             main:
               body: test ! -f submodule/README.mkd
