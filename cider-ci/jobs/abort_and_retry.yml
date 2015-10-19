@@ -16,9 +16,9 @@ jobs:
           bash: true
         scripts:
           main:
-            body: sleep 30
-          clean-up:
             body: sleep 10
+          clean-up:
+            body: sleep 5
             ignore-abort: true
             start-when:
               - script: main
