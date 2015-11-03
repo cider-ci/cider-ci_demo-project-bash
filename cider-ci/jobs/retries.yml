@@ -1,0 +1,46 @@
+jobs:
+
+  retry:
+
+    name: Retry Demo
+
+    description: |
+      This is a job with probabilistic outcome. The tasks in this job succeed
+      with probability 1/7.
+
+      One task will use two non parallel retries and is likely to fail.
+
+      One task will use up to 12 retries (non parallel) and is likely to succeed.
+
+      The last task will use up to 5 parallel retries.
+
+
+    context:
+
+      task-defaults:
+        traits:
+          bash: true
+        max-auto-trials: 2
+        scripts:
+          main:
+            body: |
+              #!/usr/bin/env bash
+              RES=$((RANDOM % 8))
+              echo "exit value $RES"
+              sleep 5
+              exit $RES
+
+      tasks:
+
+        retry-default:
+          name: Retry with defaults.
+
+        retry-max:
+          name: Retry with up to 12 trials.
+          max-auto-trials: 12
+
+        retry-max-eager:
+          name: Retry with up to 12 trials and 3 eager (parallel) trials.
+          eager-trials: 3
+          max-auto-trials: 12
+
