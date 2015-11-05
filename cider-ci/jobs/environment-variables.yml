@@ -4,13 +4,13 @@ jobs:
     name: Environment Variables Demo
     description: |
       This job Demonstrates the usage of the `environment-variables` and
-      `environment-variables_process-templates` directive.
+      `template-environment-variables` directive.
 
       The _Set and Show_ subcontext demonstrates inheritance and runs
       some basic tests.
 
       The _Substitution_ subcontext demonstrates the usage of
-      `environment-variables_process-templates`.
+      `template-environment-variables`.
 
     context:
 
@@ -68,7 +68,7 @@ jobs:
                 substitute_ci_var:
                   environment-variables:
                     THE_SUBSTITUTED_ANSWER: "{{THE_ANSWER}}"
-                  environment-variables_process-templates: true
+                  template-environment-variables: true
                   body: |
                     test "${THE_SUBSTITUTED_ANSWER}" = 42
 
@@ -88,7 +88,7 @@ jobs:
                     P1: "{{XVNC_PORT}}"
                     P2: "{{P1}}"
                     P3: "{{P2}}"
-                  environment-variables_process-templates: true
+                  template-environment-variables: true
                   body: |
                     set -eux
                     test "${T1}" = 7
