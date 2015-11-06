@@ -31,27 +31,35 @@ jobs:
 
           tasks:
 
-            show_and_test:
-
+            show:
               name: Set and Show Environment Variables
-
               scripts:
-
                 show:
-                  body: env | sort
-
-                test-task-env-vars:
                   body: |
-                    test ${THE_ANSWER} = "42"
+                    set -eux
+                    env | sort
 
+            test-context-inheritance:
+              description: |
+                Test if an env-var setting is inherited from the super-context.
+              scripts:
                 test-inheritance:
                   body: |
+                    set -eux
+                    env | sort
                     test ${SOME_DEFAULT} == "X"
 
+            test-script-overrides:
+              description: |
+                Test if an inherited env-var setting is shadowed
+                by a script setting.
+              scripts:
                 test-script-overrides:
                   environment-variables:
                     SOME_DEFAULT: "Y"
                   body: |
+                    set -eux
+                    env | sort
                     test ${SOME_DEFAULT} == "Y"
 
 
