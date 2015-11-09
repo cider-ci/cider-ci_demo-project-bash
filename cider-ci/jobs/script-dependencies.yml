@@ -11,6 +11,7 @@ jobs:
       script-defaults:
         body: echo $(date) && sleep 1 && echo $(date) && test a = a
       task-defaults:
+        max-auto-trials: 1
         traits:
           bash: true
 
