@@ -2,7 +2,7 @@ jobs:
   file_templates:
     name: Templates
     description: |
-      The job demonstrates file templates.
+      This job demonstrates and tests file templates.
 
     context:
       tasks:

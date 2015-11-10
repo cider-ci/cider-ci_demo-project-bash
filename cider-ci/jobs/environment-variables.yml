@@ -4,13 +4,13 @@ jobs:
     name: Environment Variables Demo
     description: |
       This job Demonstrates the usage of the `environment-variables` and
-      `template-environment-variables` directive.
+      the `template-environment-variables` directive.
 
       The _Set and Show_ subcontext demonstrates inheritance and runs
       some basic tests.
 
-      The _Substitution_ subcontext demonstrates the usage of
-      `template-environment-variables`.
+      The _Substitution_ subcontext demonstrates the usage and tests
+      the `template-environment-variables` directive.
 
     context:
 

@@ -4,8 +4,8 @@ jobs:
     name: Submodule Demo
     description: |
       This job demonstrates  the usage of the `git-options`/`submodule`
-      specification.  It also checks some properties fails if they
-      the feature would not work as expected.
+      specification.  It also checks some properties and fails if the
+      feature does not work as expected.
 
     context:
 

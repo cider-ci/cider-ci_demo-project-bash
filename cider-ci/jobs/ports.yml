@@ -3,9 +3,10 @@ jobs:
   ports:
     name: Ports Demo
     description: |
-      This job demonstrates the usage of the `ports` directive.  The
-      output of `env | sort` shows the assigned port as the value of the given
-      name.
+      This job demonstrates the usage of the `ports` directive. An executor
+      will determine an available port out of the given range and announce it
+      to the trial via an environment variable. The trial will fail if no
+      port is available.
 
     context:
 

@@ -16,7 +16,7 @@ jobs:
 
           scripts:
             main:
-              timeout: 5
+              timeout: 5 Seconds
               body: sleep 1 && exit 0
 
         fail:
@@ -34,7 +34,7 @@ jobs:
 
           scripts:
             main:
-              timeout: 5
+              timeout: 5 Seconds
               body: |
                 #!/usr/bin/env bash
                 echo "MY PID $$" >> log.txt

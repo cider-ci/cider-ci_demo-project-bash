@@ -1,7 +1,7 @@
 jobs:
 
   intro-demo:
-    name: Introduction Demo and Example
+    name: Introduction Demo and Example.
 
     context:
 

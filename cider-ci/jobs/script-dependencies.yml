@@ -3,7 +3,7 @@ jobs:
   scripts-dependencies:
     name: Script Dependencies
     description: |
-      This job demonstrates scripts that are defined to depend on each other
+      This job demonstrates scripts which defined to depend on each other
       for starting and termination.
 
     context:
