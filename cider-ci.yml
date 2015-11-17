@@ -6,6 +6,7 @@ _cider-ci_include:
   - cider-ci/jobs/abort_and_retry.yml
   - cider-ci/jobs/attachments.yml
   - cider-ci/jobs/contexts.yml
+  - cider-ci/jobs/continuous-output-updates.yml
   - cider-ci/jobs/environment-variables.yml
   - cider-ci/jobs/exclusive-executor-resource.yml
   - cider-ci/jobs/exclusive-global-resources.yml

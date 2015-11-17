@@ -1,0 +1,23 @@
+jobs:
+
+  continuous-output-update-demo:
+    name: Continuous Output Update Demo
+    description:
+      This job demonstrates continuous capturing of updates
+      to stdout and stderr.
+    context:
+      task-defaults:
+        traits:
+          bash: true
+      tasks:
+        task:
+          scripts:
+            script:
+              body: |
+                set -eu
+                for i in {1..300}
+                do
+                  sleep 0.05
+                  echo "Message $i to stdout"
+                  >&2 echo "Message $i to stderr"
+                done
