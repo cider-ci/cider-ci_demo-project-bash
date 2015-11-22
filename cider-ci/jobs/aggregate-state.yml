@@ -1,0 +1,59 @@
+shared:
+
+  task-defaults: &task-defaults
+    max-auto-trials: 1
+    traits:
+      bash: true
+    scripts:
+      flip:
+        exclusive-executor-resource: "flipper"
+        body: |
+          set -eux
+          sleep 3
+          FILE_PATH="/tmp/${CIDER_CI_JOB_ID}_flip"
+          if [ -f $FILE_PATH ]; then
+            rm ${FILE_PATH}
+            exit 0
+          else
+            touch ${FILE_PATH}
+            exit 1
+          fi
+
+jobs:
+
+  aggregate-state_explicit_satisfy-any:
+    name: Aggregate State with Explicit `satisfy-any`
+    context:
+      task-defaults:
+        <<: *task-defaults
+      tasks:
+        task1:
+          aggregate-state: satisfy-any
+
+
+  aggregate-state_implicit_satisfy-any:
+    name: Aggregate State with Implicit `satisfy-any`
+    context:
+      task-defaults:
+        <<: *task-defaults
+      tasks:
+        task1: {}
+
+  aggregate-state_satisfy-last:
+    name: Aggregate State with `satisfy-last`
+    context:
+      task-defaults:
+        <<: *task-defaults
+      tasks:
+        task1:
+          aggregate-state: satisfy-last
+
+
+  aggregate-state_typo:
+    name: Aggregate State with Typo
+    context:
+      task-defaults:
+        <<: *task-defaults
+      tasks:
+        task1:
+          aggregate-state: satisfy-lats
