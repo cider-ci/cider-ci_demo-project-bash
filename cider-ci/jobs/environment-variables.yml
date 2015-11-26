@@ -110,6 +110,6 @@ jobs:
                   environment-variables:
                     THE_SUBSTITUTED_ANSWER: "{{THE_ANSWER}}"
                   body: |
-                    test "${THE_SUBSTITUTED_ANSWER}" = '{{THE_ANSWER}}'
+                    test "${THE_SUBSTITUTED_ANSWER}" != 42
 
 
