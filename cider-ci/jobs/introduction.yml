@@ -2,7 +2,5 @@ jobs:
   intro-demo:
     name: Introduction Demo and Example.
     task-defaults:
-      traits:
-        bash: true
-    tasks:
-      - test a = a
+      traits: [bash]
+    task: test a = a
