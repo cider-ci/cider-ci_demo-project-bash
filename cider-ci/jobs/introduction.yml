@@ -1,23 +1,8 @@
 jobs:
-
   intro-demo:
     name: Introduction Demo and Example.
-
-    context:
-
-      tasks:
-
-        example-task:
-          name: Example Task
-
-          traits:
-            bash: true
-
-          scripts:
-
-            equality:
-              name: Equality Test
-
-              body: |
-                #!/usr/bin/env bash
-                test a = a
+    task-defaults:
+      traits:
+        bash: true
+    tasks:
+      - test a = a
