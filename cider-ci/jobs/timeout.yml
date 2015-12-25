@@ -29,8 +29,8 @@ jobs:
 
           trial-attachments:
             logs:
-              glob: log.txt
               content-type: text/plain
+              include-match: ^log\.txt$
 
           scripts:
             main:

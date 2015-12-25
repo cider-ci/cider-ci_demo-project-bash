@@ -19,13 +19,14 @@ jobs:
 
           trial-attachments:
             logs:
-              glob: tmp/*trial*.txt
               content-type: text/plain
+              include-match: ^tmp\/.*trial.*\.txt$
 
           tree-attachments:
             logs:
-              glob: tmp/*tree*.txt
               content-type: text/plain
+              include-match: ^tmp\/.*tree.*\.txt$
+
 
           scripts:
             trial-attachment:

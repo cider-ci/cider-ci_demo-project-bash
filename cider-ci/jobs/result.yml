@@ -26,8 +26,8 @@ jobs:
 
           trial-attachments:
             result_file:
-              glob: result.json
               content-type: application/json
+              include-match: ^result\.json$
 
           scripts:
             main:
