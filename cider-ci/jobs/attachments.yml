@@ -27,7 +27,6 @@ jobs:
               content-type: text/plain
               include-match: ^tmp\/.*tree.*\.txt$
 
-
           scripts:
             trial-attachment:
               body: >
