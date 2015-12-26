@@ -23,8 +23,7 @@ jobs:
               include-match: ^tmp\/.*trial.*\.txt$
 
           tree-attachments:
-            logs:
-              content-type: text/plain
+            - content-type: text/plain
               include-match: ^tmp\/.*tree.*\.txt$
 
           scripts:
