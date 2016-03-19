@@ -1,0 +1,23 @@
+jobs:
+
+  dispatch-storm-delay:
+
+    name: Dispatch-Storm Delay Demo
+    description: |
+      This job demonstrates the 'dispatch-storm-delay-duration' feature.
+
+    context:
+
+      task-defaults:
+        eager-trials: 2
+        max-auto-trials: 2
+        dispatch-storm-delay-duration: 20 Seconds
+        traits:
+          bash: true
+        scripts:
+          main:
+            body: sleep 30
+
+      tasks:
+        t1: {}
+        t2: {}
