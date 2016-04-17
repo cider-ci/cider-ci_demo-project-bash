@@ -4,14 +4,14 @@ jobs:
 
     name: Dispatch-Storm Delay Demo
     description: |
-      This job demonstrates the 'dispatch-storm-delay-duration' feature.
+      This job demonstrates the 'dispatch_storm_delay_duration' feature.
 
     context:
 
       task_defaults:
         eager_trials: 2
         max_trials: 2
-        dispatch-storm-delay-duration: 20 Seconds
+        dispatch_storm_delay_duration: 20 Seconds
         traits:
           Bash: true
         scripts:

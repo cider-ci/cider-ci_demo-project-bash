@@ -60,7 +60,7 @@ jobs:
           git_options:
             submodules:
               clone:
-                exclude-match: submodule|or-whatever
+                exclude_match: submodule|or-whatever
           scripts:
             main:
               body: test ! -f submodule/README.md
