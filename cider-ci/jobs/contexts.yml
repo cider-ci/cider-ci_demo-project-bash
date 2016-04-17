@@ -4,15 +4,15 @@ jobs:
     name: Contexts Demo
     description:
       This job demonstrates the use of contexts and the inheritance
-      of `task-defaults` e.g. from the top level context to its
+      of `task_defaults` e.g. from the top level context to its
       subcontexts.
 
     context:
 
-      task-defaults:
+      task_defaults:
         traits:
-          bash: true
-        environment-variables:
+          Bash: true
+        environment_variables:
            STAR: Sun
            PLANET: Earth
            MOON: Moon
@@ -34,8 +34,8 @@ jobs:
 
           name: Jupiter
 
-          task-defaults:
-            environment-variables:
+          task_defaults:
+            environment_variables:
               PLANET: Jupiter
 
           tasks:
@@ -53,8 +53,8 @@ jobs:
 
               name: Io
 
-              task-defaults:
-                environment-variables:
+              task_defaults:
+                environment_variables:
                   MOON: Io
 
               tasks:

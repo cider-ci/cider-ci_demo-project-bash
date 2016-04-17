@@ -28,7 +28,7 @@ jobs:
           name: Show the Last Three Commits
           body: git log -n3
 
-      task-defaults:
-        traits: [git, bash]
+      task_defaults:
+        traits: [git, Bash]
 
 

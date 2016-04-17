@@ -9,18 +9,18 @@ jobs:
 
     context:
 
-      task-defaults:
-        exclusive-global-resources:
+      task_defaults:
+        exclusive_global_resources:
           any: true
         traits:
-          bash: true
+          Bash: true
         scripts:
           main:
             body: sleep 10
           clean-up:
             body: sleep 5
-            ignore-abort: true
-            start-when:
+            ignore_abort: true
+            start_when:
               - script: main
                 states: [aborted, passed, failed, skipped]
 

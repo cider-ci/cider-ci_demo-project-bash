@@ -6,9 +6,9 @@ jobs:
       This job demonstrates continuous capturing of updates
       to stdout and stderr.
     context:
-      task-defaults:
+      task_defaults:
         traits:
-          bash: true
+          Bash: true
       tasks:
         task:
           scripts:

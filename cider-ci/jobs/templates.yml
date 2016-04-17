@@ -10,7 +10,7 @@ jobs:
           name: "Simple Template"
           description: |
             This task demonstrates the usage of a very simple template.
-          environment-variables:
+          environment_variables:
             X: 42
           templates:
             - src: [cider-ci, templates, t1.yml]
@@ -44,7 +44,7 @@ jobs:
           description: |
             Templates are evaluated recursively
             until the result doesn't change anymore.
-          environment-variables:
+          environment_variables:
             X2: '{{X3}}'
             X: '{{X2}}'
             X3: 42

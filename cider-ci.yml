@@ -2,7 +2,7 @@
 # practice. It is done here to show every feature in a small, and independent
 # however complete environment.
 
-_cider-ci_include:
+include:
   - cider-ci/jobs/abort_and_retry.yml
   - cider-ci/jobs/aggregate-state.yml
   - cider-ci/jobs/attachments.yml

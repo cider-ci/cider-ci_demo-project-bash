@@ -5,7 +5,7 @@ jobs:
     description: |
       This job creates the specially treated `result.json` file with
       `value`, and `summary` properties.  It also attaches the `result.json` by
-      the `trial-attachments` directive.
+      the `trial_attachments` directive.
 
     context:
 
@@ -22,12 +22,12 @@ jobs:
             and no further.
 
           traits:
-            bash: true
+            Bash: true
 
-          trial-attachments:
+          trial_attachments:
             result_file:
-              content-type: application/json
-              include-match: ^result\.json$
+              content_type: application/json
+              include_match: ^result\.json$
 
           scripts:
             main:

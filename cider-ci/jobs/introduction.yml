@@ -3,6 +3,6 @@ jobs:
     name: Introduction Demo and Example
     description: |
       A very concise job declaration which uses the compact notation.
-    task-defaults:
-      traits: [bash]
+    task_defaults:
+      traits: [Bash]
     task: test a = a

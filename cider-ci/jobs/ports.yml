@@ -10,10 +10,10 @@ jobs:
 
     context:
 
-      task-defaults:
+      task_defaults:
         traits:
-          bash: true
-        environment-variables:
+          Bash: true
+        environment_variables:
           CI_TASK_DEFAULTS: "Inherited!"
 
       tasks:

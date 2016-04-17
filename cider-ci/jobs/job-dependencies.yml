@@ -8,9 +8,9 @@ jobs:
       Additionally it will be automatically triggered if a branch matching the
       regular expression /^trigger-prerequisite$/ is updated.
 
-    run-on:
+    run_on:
     - type: branch
-      include-match: ^trigger-prerequisite$
+      include_match: ^trigger-prerequisite$
 
     context:
 
@@ -20,7 +20,7 @@ jobs:
           name: Sleep
 
           traits:
-            bash: true
+            Bash: true
 
           scripts:
             main:
@@ -34,12 +34,12 @@ jobs:
       This demo can only be started if the "job-prerequisite" has passed. There
       is also a corresponding trigger defined for the sake of demonstration.
 
-    depends-on:
+    depends_on:
     - type: job
       job: job-prerequisite
       states: [passed]
 
-    run-on:
+    run_on:
     - type: job
       job: job-prerequisite
       states: [passed]
@@ -53,7 +53,7 @@ jobs:
           name: Sleep
 
           traits:
-            bash: true
+            Bash: true
 
           scripts:
             main:
@@ -66,15 +66,15 @@ jobs:
       This demo can only be started if the "job-prerequisite" in the submodule
       `submodule` has passed.
 
-    depends-on:
+    depends_on:
     - type: job
       job: job-prerequisite
       submodule: ['submodule']
       states: [passed]
 
-    run-on:
+    run_on:
     - type: branch
-      include-match: ^.*$
+      include_match: ^.*$
 
     context:
 
@@ -85,7 +85,7 @@ jobs:
           name: Sleep
 
           traits:
-            bash: true
+            Bash: true
 
           scripts:
             main:

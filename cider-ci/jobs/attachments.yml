@@ -2,8 +2,8 @@ jobs:
   attachments:
     name: Attachments Demo
     description: |
-      This job demonstrates the usage of the `tree-attachments` and
-      `trial-attachments` directive.  It creates a file which is then attached
+      This job demonstrates the usage of the `tree_attachments` and
+      `trial_attachments` directive.  It creates a file which is then attached
       as a tree- as well as a trial-attachment.
 
     context:
@@ -15,16 +15,16 @@ jobs:
           name: Attachments Demo
 
           traits:
-            bash: true
+            Bash: true
 
-          trial-attachments:
+          trial_attachments:
             logs:
-              content-type: text/plain
-              include-match: ^tmp\/.*trial.*\.txt$
+              content_type: text/plain
+              include_match: ^tmp\/.*trial.*\.txt$
 
-          tree-attachments:
-            - content-type: text/plain
-              include-match: ^tmp\/.*tree.*\.txt$
+          tree_attachments:
+            - content_type: text/plain
+              include_match: ^tmp\/.*tree.*\.txt$
 
           scripts:
             trial-attachment:

@@ -5,7 +5,7 @@ jobs:
     name: Exclusive Global Resources Demo
 
     description: |
-      This job demonstrates the `exclusive-global-resources` directive. At a
+      This job demonstrates the `exclusive_global_resources` directive. At a
       given time at most one trial will be executing for every exclusive global
       resource. This spans over multiple tasks, and even jobs as the name
       global suggests.
@@ -18,14 +18,14 @@ jobs:
 
     context:
 
-      task-defaults:
+      task_defaults:
 
-        max-auto-trials: 1
+        max_trials: 1
 
         traits:
-          bash: true
+          Bash: true
 
-        exclusive-global-resources:
+        exclusive_global_resources:
           "/tmp/_cider-ci_some-global-resource.lock": true
 
         scripts:

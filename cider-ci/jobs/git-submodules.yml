@@ -3,20 +3,20 @@ jobs:
   submodules:
     name: Submodule Demo
     description: |
-      This job demonstrates  the usage of the `git-options`/`submodule`
+      This job demonstrates  the usage of the `git_options`/`submodule`
       specification.  It also checks some properties and fails if the
       feature does not work as expected.
 
     context:
 
-      task-defaults:
-        eager-trials: 1
-        max-auto-trials: 2
+      task_defaults:
+        eager_trials: 1
+        max_trials: 2
 
         traits:
-          bash: true
+          Bash: true
 
-        git-options:
+        git_options:
           submodules:
             clone: True
             timeout: 30
@@ -24,10 +24,10 @@ jobs:
       tasks:
 
         submodule-exists:
-          name: Verify that file in submodule does exist
+          name: Verify that README.md in the submodule does exist
           scripts:
             main:
-              body: test -f submodule/README.mkd
+              body: test -f submodule/README.md
 
         ls-dir:
           name: List submodule directory
@@ -36,38 +36,32 @@ jobs:
               body:
                 ls -lah submodule
 
-        verify-commit:
-          name: Verify proper commit in submodule directory
-          scripts:
-            main:
-              body: cd submodule && test $(git log -n 1 --pretty='%H') == 3b69510478ea1d9858e949bdd196db5629aeb1da
-
         test-clone-false:
-          name: Verify that file in submodule does not exist if clone is False
-          git-options:
+          name: Verify that README.md in the submodule does not exist if clone is False
+          git_options:
             submodules:
               clone: False
           scripts:
             main:
-              body: test ! -f submodule/README.mkd
+              body: test ! -f submodule/README.md
 
-        test-include-match:
-          name: Verify that file in submodule does not exist if clone is False
-          git-options:
+        test-include_match:
+          name: Verify that README.md in the submodule does exist if include_match matches
+          git_options:
             submodules:
               clone:
-                include-match: submodule
+                include_match: submodule
           scripts:
             main:
-              body: test -f submodule/README.mkd
+              body: test -f submodule/README.md
 
         test-exclude-match:
-          name: Verify that file in submodule does not exist if clone is False
-          git-options:
+          name: Verify that README.md in the submodule does not exist if include_match does not matche
+          git_options:
             submodules:
               clone:
                 exclude-match: submodule|or-whatever
           scripts:
             main:
-              body: test ! -f submodule/README.mkd
+              body: test ! -f submodule/README.md
 

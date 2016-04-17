@@ -12,7 +12,7 @@ jobs:
 
     context:
 
-      script-defaults:
+      script_defaults:
 
         exclusive-executor-resource: "/tmp/exclusive-executor-resource.txt"
 
@@ -25,10 +25,10 @@ jobs:
           test $FILE_VAL = $START_VAL
 
 
-      task-defaults:
+      task_defaults:
 
         traits:
-          bash: true
+          Bash: true
 
       tasks:
 

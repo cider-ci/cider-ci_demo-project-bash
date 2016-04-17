@@ -1,26 +1,26 @@
 jobs:
 
-  environment-variables:
+  environment_variables:
     name: Environment Variables Demo
     description: |
-      This job Demonstrates the usage of the `environment-variables` and
-      the `template-environment-variables` directive.
+      This job Demonstrates the usage of the `environment_variables` and
+      the `template_environment_variables` directive.
 
       The _Set and Show_ subcontext demonstrates inheritance and runs
       some basic tests.
 
       The _Substitution_ subcontext demonstrates the usage and tests
-      the `template-environment-variables` directive.
+      the `template_environment_variables` directive.
 
     context:
 
-      task-defaults:
-        environment-variables:
+      task_defaults:
+        environment_variables:
           CI_TASK_DEFAULTS: "Inherited!"
           SOME_DEFAULT: "X"
           THE_ANSWER: 42
         traits:
-          bash: true
+          Bash: true
 
 
       subcontexts:
@@ -55,7 +55,7 @@ jobs:
                 by a script setting.
               scripts:
                 test-script-overrides:
-                  environment-variables:
+                  environment_variables:
                     SOME_DEFAULT: "Y"
                   body: |
                     set -eux
@@ -71,13 +71,14 @@ jobs:
 
             enabled-substitution:
               name: "Enabled Substitution"
-              script-defaults:
+              script_defaults:
               scripts:
                 substitute_ci_var:
-                  environment-variables:
+                  environment_variables:
                     THE_SUBSTITUTED_ANSWER: "{{THE_ANSWER}}"
-                  template-environment-variables: true
+                  template_environment_variables: true
                   body: |
+                    set -eux
                     test "${THE_SUBSTITUTED_ANSWER}" = 42
 
             recursive-substitution:
@@ -89,14 +90,14 @@ jobs:
                   max: 5999
               scripts:
                 substitute_ci_var:
-                  environment-variables:
+                  environment_variables:
                     T1: "{{T2}}"
                     T2: "{{T3}}"
                     T3: 7
                     P1: "{{XVNC_PORT}}"
                     P2: "{{P1}}"
                     P3: "{{P2}}"
-                  template-environment-variables: true
+                  template_environment_variables: true
                   body: |
                     set -eux
                     test "${T1}" = 7
@@ -107,9 +108,9 @@ jobs:
               name: "Disabled Substitution"
               scripts:
                 substitute_ci_var:
-                  environment-variables:
+                  template_environment_variables: false
+                  environment_variables:
                     THE_SUBSTITUTED_ANSWER: "{{THE_ANSWER}}"
                   body: |
+                    set -eux
                     test "${THE_SUBSTITUTED_ANSWER}" != 42
-
-

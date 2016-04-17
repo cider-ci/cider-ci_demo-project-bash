@@ -8,12 +8,12 @@ jobs:
 
     context:
 
-      task-defaults:
-        eager-trials: 2
-        max-auto-trials: 2
+      task_defaults:
+        eager_trials: 2
+        max_trials: 2
         dispatch-storm-delay-duration: 20 Seconds
         traits:
-          bash: true
+          Bash: true
         scripts:
           main:
             body: sleep 30

@@ -8,7 +8,7 @@
           "some-task": {
             "name": "Some Task Written in JSON",
             "traits": {
-              "bash": true
+              "Bash": true
             },
             "scripts": {
               "main": {

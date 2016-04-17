@@ -8,12 +8,12 @@ jobs:
 
     context:
 
-      script-defaults:
+      script_defaults:
         body: echo $(date) && sleep 1 && echo $(date) && test a = a
-      task-defaults:
-        max-auto-trials: 1
+      task_defaults:
+        max_trials: 1
         traits:
-          bash: true
+          Bash: true
 
       tasks:
 
@@ -33,9 +33,10 @@ jobs:
             This tasks has one script which will fail but is ignored, hence the task succeeds.
           scripts:
             fail:
-              name: script-failing
               body: echo $(date) && sleep 1 && echo $(date) && test a = b
-              ignore-state: true
+              ignore_state: true
+            pass:
+              body: echo $(date) && sleep 1 && echo $(date) && test a = a
 
         skip:
           name: Skip
@@ -46,7 +47,7 @@ jobs:
             skipped:
               name: unmet-dependency
               body: echo $(date) && sleep 1 && echo $(date) && test a = b
-              start-when:
+              start_when:
               - script: root
 
         skip-but-ignore:
@@ -58,8 +59,8 @@ jobs:
             skipped:
               name: unmet-dependency
               body: echo $(date) && sleep 1 && echo $(date) && test a = b
-              ignore-state: true
-              start-when:
+              ignore_state: true
+              start_when:
               - script: root
 
         comprehensive:
@@ -73,19 +74,19 @@ jobs:
             failing:
               name: Failing
               body: echo $(date) && sleep 1 && echo $(date) && test a = b
-              ignore-state: true
-              start-when:
+              ignore_state: true
+              start_when:
               - script: root
 
-            start-when-failing-passed:
+            start_when-failing-passed:
               name: Start when "failing" passed
-              ignore-state: true
-              start-when:
+              ignore_state: true
+              start_when:
               - script: script-failing
 
-            start-when-failing-failed:
+            start_when-failing-failed:
               name: Start when "failing" failed
-              start-when:
+              start_when:
               - script: failing
                 states: [failed]
 
@@ -105,10 +106,10 @@ jobs:
                 echo "to be terminated pid $$" >> to_be_terminated.log
                 echo "to be terminated pid $$"
                 time sleep 20 && echo "should never be reached"
-              start-when:
+              start_when:
               - script: initial
                 states: [executing]
-              terminate-when:
+              terminate_when:
               - script: initial
                 states: [passed, failed, skipped]
 
@@ -124,13 +125,13 @@ jobs:
             never-satisfied:
               name: Never Satisfied
               body: exit 0
-              ignore-state: true
-              start-when:
+              ignore_state: true
+              start_when:
               - script: initial
                 states: [failed]
             when-skipped:
               body: exit 0
               name: When "Never Satisfied" Skipped
-              start-when:
+              start_when:
               - script: never-satisfied
                 states: [skipped]
