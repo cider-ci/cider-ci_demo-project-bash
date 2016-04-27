@@ -9,8 +9,7 @@ jobs:
     context:
 
       task-defaults:
-        eager-trials: 2
-        max-auto-trials: 2
+        max-auto-trials: 1
         dispatch-storm-delay-duration: 20 Seconds
         traits:
           bash: true
