@@ -5,7 +5,7 @@ jobs:
     description:
       This job demonstrates the use of contexts and the inheritance
       of `task_defaults` e.g. from the top level context to its
-      subcontexts.
+      contexts.
 
     context:
 
@@ -28,7 +28,7 @@ jobs:
                 && test $PLANET = 'Earth' \
                 && test $MOON = 'Moon'
 
-      subcontexts:
+      contexts:
 
         jupiter:
 
@@ -47,7 +47,7 @@ jobs:
                     test $STAR = 'Sun'  \
                     && test $PLANET = 'Jupiter'
 
-          subcontexts:
+          contexts:
 
             io:
 

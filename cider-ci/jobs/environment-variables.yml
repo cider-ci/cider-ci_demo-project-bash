@@ -23,7 +23,7 @@ jobs:
           Bash: true
 
 
-      subcontexts:
+      contexts:
 
         set_and_show:
 
