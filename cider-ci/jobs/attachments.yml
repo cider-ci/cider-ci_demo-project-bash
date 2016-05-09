@@ -18,12 +18,13 @@ jobs:
             Bash: true
 
           trial_attachments:
-            logs:
+            tmp-files:
               content_type: text/plain
               include_match: ^tmp\/.*trial.*\.txt$
 
           tree_attachments:
-            - content_type: text/plain
+            tmp-files:
+              content_type: text/plain
               include_match: ^tmp\/.*tree.*\.txt$
 
           scripts:

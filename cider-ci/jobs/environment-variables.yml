@@ -18,7 +18,7 @@ jobs:
         environment_variables:
           CI_TASK_DEFAULTS: "Inherited!"
           SOME_DEFAULT: "X"
-          THE_ANSWER: 42
+          THE_ANSWER: "42"
         traits:
           Bash: true
 
@@ -85,7 +85,6 @@ jobs:
               name: "Recursive Substitution"
               ports:
                 XVNC_PORT:
-                  inet_address: "localhost"
                   min: 5900
                   max: 5999
               scripts:
@@ -93,7 +92,7 @@ jobs:
                   environment_variables:
                     T1: "{{T2}}"
                     T2: "{{T3}}"
-                    T3: 7
+                    T3: "7"
                     P1: "{{XVNC_PORT}}"
                     P2: "{{P1}}"
                     P3: "{{P2}}"

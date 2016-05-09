@@ -11,10 +11,11 @@ jobs:
           description: |
             This task demonstrates the usage of a very simple template.
           environment_variables:
-            X: 42
+            X: '42'
           templates:
-            - src: [cider-ci, templates, t1.yml]
-              dest: [t1.yml]
+            t1:
+              src: cider-ci/templates/t1.yml
+              dest: t1.yml
           scripts:
             test:
               body: |
@@ -30,8 +31,9 @@ jobs:
               min: 6000
               max: 6999
           templates:
-            - src: [cider-ci, templates, port]
-              dest: [port]
+            port:
+              src: cider-ci/templates/port
+              dest: port
           scripts:
             test:
               body: |
@@ -47,10 +49,11 @@ jobs:
           environment_variables:
             X2: '{{X3}}'
             X: '{{X2}}'
-            X3: 42
+            X3: '42'
           templates:
-            - src: [cider-ci, templates, t1.yml]
-              dest: [t1.yml]
+            t1:
+              src: cider-ci/templates/t1.yml
+              dest: t1.yml
           scripts:
             test:
               body: |
@@ -63,11 +66,11 @@ jobs:
             The script is never called if the template is missing
             and the task fails.
           templates:
-            - src: [cider-ci, templates, idontexist.yml]
-              dest: [t1.yml]
+            t1:
+              src: cider-ci/templates/idontexist.yml
+              dest: t1.yml
           scripts:
             test:
               body: |
                 set -eux
                 test a = a
-

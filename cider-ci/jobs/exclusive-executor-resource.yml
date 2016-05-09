@@ -4,9 +4,9 @@ jobs:
   exclusive-executor-resource:
     name: Exclusive Executor Resource
     description:
-      This job tests the `exclusive-executor-resource` directive of scripts.
+      This job tests the `exclusive_executor_resource` directive of scripts.
 
-      The `exclusive-executor-resource` directive ensures that at any given
+      The `exclusive_executor_resource` directive ensures that at any given
       time only one script with a particular value is executing for a
       particular executor.
 
@@ -15,7 +15,7 @@ jobs:
 
       script_defaults:
 
-        exclusive-executor-resource: "/tmp/exclusive-executor-resource.txt"
+        exclusive_executor_resource: "/tmp/exclusive-executor-resource.txt"
 
         body: |
           set -eux

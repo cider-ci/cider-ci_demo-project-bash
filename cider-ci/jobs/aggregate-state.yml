@@ -6,7 +6,7 @@ shared:
       Bash: true
     scripts:
       flip:
-        exclusive-executor-resource: "flipper"
+        exclusive_executor_resource: "flipper"
         body: |
           set -eux
           sleep 3

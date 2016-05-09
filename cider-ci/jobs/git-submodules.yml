@@ -18,8 +18,7 @@ jobs:
 
         git_options:
           submodules:
-            clone: True
-            timeout: 30
+            include_match: ^.*$
 
       tasks:
 
@@ -40,7 +39,7 @@ jobs:
           name: Verify that README.md in the submodule does not exist if clone is False
           git_options:
             submodules:
-              clone: False
+              exclude_match: .*
           scripts:
             main:
               body: test ! -f submodule/README.md
@@ -49,8 +48,7 @@ jobs:
           name: Verify that README.md in the submodule does exist if include_match matches
           git_options:
             submodules:
-              clone:
-                include_match: submodule
+              include_match: submodule
           scripts:
             main:
               body: test -f submodule/README.md
@@ -59,8 +57,7 @@ jobs:
           name: Verify that README.md in the submodule does not exist if include_match does not matche
           git_options:
             submodules:
-              clone:
-                exclude_match: submodule|or-whatever
+              exclude_match: submodule|or-whatever
           scripts:
             main:
               body: test ! -f submodule/README.md
