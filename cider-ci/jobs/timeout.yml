@@ -20,7 +20,8 @@ jobs:
               body: sleep 1 && exit 0
             after-main:
               start_when:
-                - script: main
+                main-has-passed:
+                  script_key: main
               body: exit 0
 
         fail:
@@ -45,7 +46,8 @@ jobs:
                 sleep 15 && exit 0
             after-main:
               start_when:
-                - script: main
+                main-has-passed:
+                  script_key: main
               body: exit 0
 
       task_defaults:

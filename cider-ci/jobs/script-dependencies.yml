@@ -48,7 +48,8 @@ jobs:
               name: unmet-dependency
               body: echo $(date) && sleep 1 && echo $(date) && test a = b
               start_when:
-              - script: root
+                root-has-passed:
+                  script_key: root
 
         skip-but-ignore:
           name: Skip but ignore
@@ -61,7 +62,8 @@ jobs:
               body: echo $(date) && sleep 1 && echo $(date) && test a = b
               ignore_state: true
               start_when:
-              - script: root
+                root-has-passed:
+                  script_key: root
 
         comprehensive:
           name: Comprehensive
@@ -76,19 +78,22 @@ jobs:
               body: echo $(date) && sleep 1 && echo $(date) && test a = b
               ignore_state: true
               start_when:
-              - script: root
+                root-has-passed:
+                  script_key: root
 
             start_when-failing-passed:
               name: Start when "failing" passed
               ignore_state: true
               start_when:
-              - script: script-failing
+                script-failing-has-passed:
+                  script_key: script-failing
 
             start_when-failing-failed:
               name: Start when "failing" failed
               start_when:
-              - script: failing
-                states: [failed]
+                failing-has-failed:
+                  script_key: failing
+                  states: [failed]
 
         termination:
           name: Termination
@@ -107,11 +112,13 @@ jobs:
                 echo "to be terminated pid $$"
                 time sleep 20 && echo "should never be reached"
               start_when:
-              - script: initial
-                states: [executing]
+                initial-is-executing:
+                  script_key: initial
+                  states: [executing]
               terminate_when:
-              - script: initial
-                states: [passed, failed, skipped]
+                initial-has-terminated:
+                  script_key: initial
+                  states: [aborted, defective, failed, passed, skipped]
 
         skipping:
           name: Start on Skipped
@@ -127,11 +134,14 @@ jobs:
               body: exit 0
               ignore_state: true
               start_when:
-              - script: initial
-                states: [failed]
+                initial-has-failed:
+                  script_key: initial
+                  states: [failed]
             when-skipped:
               body: exit 0
               name: When "Never Satisfied" Skipped
               start_when:
-              - script: never-satisfied
-                states: [skipped]
+                nerver-satisfied-has-been-skipped:
+                  script_key: never-satisfied
+                  states: [skipped]
+

@@ -21,7 +21,8 @@ jobs:
             body: sleep 5
             ignore_abort: true
             start_when:
-              - script: main
+              main-has-terminated:
+                script_key: main
                 states: [aborted, passed, failed, skipped]
 
       tasks:
