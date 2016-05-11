@@ -8,9 +8,10 @@ jobs:
       Additionally it will be automatically triggered if a branch matching the
       regular expression /^trigger-prerequisite$/ is updated.
 
-    run_on:
-    - type: branch
-      include_match: ^trigger-prerequisite$
+    run_when:
+      branch-matches-trigger-prerequisite:
+        type: branch
+        include_match: ^trigger-prerequisite$
 
     context:
 
@@ -35,14 +36,16 @@ jobs:
       is also a corresponding trigger defined for the sake of demonstration.
 
     depends_on:
-    - type: job
-      job: job-prerequisite
-      states: [passed]
+      job-prerequisite-has-passed:
+        type: job
+        job_key: job-prerequisite
+        states: [passed]
 
-    run_on:
-    - type: job
-      job: job-prerequisite
-      states: [passed]
+    run_when:
+      job-prerequisite-has-passed:
+        type: job
+        job_key: job-prerequisite
+        states: [passed]
 
     context:
 
@@ -67,14 +70,16 @@ jobs:
       `submodule` has passed.
 
     depends_on:
-    - type: job
-      job: job-prerequisite
-      submodule: ['submodule']
-      states: [passed]
+      job-prerequisite_in_submodule_has_passed:
+        type: job
+        job_key: job-prerequisite
+        submodule: ['submodule']
+        states: [passed]
 
-    run_on:
-    - type: branch
-      include_match: ^.*$
+    run_when:
+      run-on-any-branch:
+        type: branch
+        include_match: ^.*$
 
     context:
 
