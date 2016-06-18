@@ -1,6 +1,0 @@
-#!/bin/bash
-
-RAND_FLOAT=`echo "$RANDOM / 32767" | bc -l`
-
-printf '{"value" : 0%s, "summary" : "%.2f%%"}'  "$RAND_FLOAT"  `echo "$RAND_FLOAT * 100" | bc -l` > result.json
-

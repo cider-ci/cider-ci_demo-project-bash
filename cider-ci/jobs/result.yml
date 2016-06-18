@@ -21,8 +21,8 @@ jobs:
             available in the job if and only if it contains exactly this task
             and no further.
 
-          traits:
-            Bash: true
+          traits: {}
+            #  Ruby: true
 
           trial_attachments:
             result_file:
@@ -31,4 +31,4 @@ jobs:
 
           scripts:
             main:
-              body: ./bin/create-result-json
+              body: ./bin/create-result-json.rb
