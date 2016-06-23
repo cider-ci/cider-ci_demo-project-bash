@@ -1,31 +1,27 @@
-shared:
-
-  task_defaults: &task_defaults
-    max_trials: 1
-    traits:
-      Bash: true
-    scripts:
-      flip:
-        exclusive_executor_resource: "flipper"
-        body: |
-          set -eux
-          sleep 3
-          FILE_PATH="/tmp/${CIDER_CI_JOB_ID}_flip"
-          if [ -f $FILE_PATH ]; then
-            rm ${FILE_PATH}
-            exit 0
-          else
-            touch ${FILE_PATH}
-            exit 1
-          fi
-
 jobs:
 
   aggregate-state_explicit_satisfy-any:
     name: Aggregate State with Explicit `satisfy-any`
     context:
-      task_defaults:
-        <<: *task_defaults
+      task_defaults: &TASK_DEFAULTS
+        max_trials: 1
+        traits:
+          Bash: true
+        scripts:
+          flip:
+            exclusive_executor_resource: "flipper"
+            body: |
+              set -eux
+              sleep 3
+              FILE_PATH="/tmp/${CIDER_CI_JOB_ID}_flip"
+              if [ -f $FILE_PATH ]; then
+                rm ${FILE_PATH}
+                exit 0
+              else
+                touch ${FILE_PATH}
+                exit 1
+              fi
+
       tasks:
         task1:
           aggregate_state: satisfy-any
@@ -35,7 +31,7 @@ jobs:
     name: Aggregate State with Implicit `satisfy-any`
     context:
       task_defaults:
-        <<: *task_defaults
+        <<: *TASK_DEFAULTS
       tasks:
         task1: {}
 
@@ -43,7 +39,7 @@ jobs:
     name: Aggregate State with `satisfy-last`
     context:
       task_defaults:
-        <<: *task_defaults
+        <<: *TASK_DEFAULTS
       tasks:
         task1:
           aggregate_state: satisfy-last
@@ -53,7 +49,7 @@ jobs:
     name: Aggregate State with Typo
     context:
       task_defaults:
-        <<: *task_defaults
+        <<: *TASK_DEFAULTS
       tasks:
         task1:
           aggregate_state: satisfy-last
