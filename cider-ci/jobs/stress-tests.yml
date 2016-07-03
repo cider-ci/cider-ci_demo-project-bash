@@ -1,0 +1,26 @@
+jobs:
+  stress-cpu-100:
+    name: Stress-Test CPU 100x
+    description: |
+     100 tasks, each will execute `stress-ng --cpu 1 --cpu-ops 10000`.
+    task_defaults:
+      traits:
+        stress-ng: yes
+      scripts:
+        stress:
+          body: stress-ng --cpu 1 --cpu-ops 10000
+    generate_tasks:
+      include_match: ^files/0\d\d$
+
+  stress-cpu-1000:
+    name: Stress-Test CPU 1000x
+    description: |
+     1000 tasks, each will execute `stress-ng --cpu 1 --cpu-ops 10000`.
+    task_defaults:
+      traits:
+        stress-ng: yes
+      scripts:
+        stress:
+          body: stress-ng --cpu 1 --cpu-ops 10000
+    generate_tasks:
+      include_match: ^files/\d\d\d$

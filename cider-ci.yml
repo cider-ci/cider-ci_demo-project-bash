@@ -8,7 +8,7 @@ include:
   - cider-ci/jobs/attachments.yml
   - cider-ci/jobs/contexts.yml
   - cider-ci/jobs/continuous-output-updates.yml
-  - cider-ci/jobs/cpu-stress.yml
+  - cider-ci/jobs/stress-tests.yml
   - cider-ci/jobs/dispatch-storm-delay.yml
   - cider-ci/jobs/environment-variables.yml
   - cider-ci/jobs/exclusive-executor-resource.yml
