@@ -71,7 +71,6 @@ jobs:
 
             enabled-substitution:
               name: "Enabled Substitution"
-              script_defaults:
               scripts:
                 substitute_ci_var:
                   environment_variables:
