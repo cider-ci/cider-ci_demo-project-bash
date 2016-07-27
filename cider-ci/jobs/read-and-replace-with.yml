@@ -1,0 +1,15 @@
+jobs:
+  read-and-replace-with-demo:
+    name: Read and Replace With Demo
+    context:
+      tasks:
+        task1:
+          environment_variables:
+            READ_FILE_CONTENT:
+              read_and_replace_with: string.txt
+          scripts:
+            main:
+              body: |
+                set -eux
+                echo ${READ_FILE_CONTENT}
+                [ "${READ_FILE_CONTENT}" = '¡¿Qué viste?!' ]

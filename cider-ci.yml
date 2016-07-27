@@ -8,7 +8,6 @@ include:
   - cider-ci/jobs/attachments.yml
   - cider-ci/jobs/contexts.yml
   - cider-ci/jobs/continuous-output-updates.yml
-  - cider-ci/jobs/stress-tests.yml
   - cider-ci/jobs/dispatch-storm-delay.yml
   - cider-ci/jobs/environment-variables.yml
   - cider-ci/jobs/exclusive-executor-resource.yml
@@ -20,8 +19,10 @@ include:
   - cider-ci/jobs/job-dependencies.yml
   - cider-ci/jobs/json.json
   - cider-ci/jobs/ports.yml
+  - cider-ci/jobs/read-and-replace-with.yml
   - cider-ci/jobs/result.yml
   - cider-ci/jobs/retries.yml
   - cider-ci/jobs/script-dependencies.yml
+  - cider-ci/jobs/stress-tests.yml
   - cider-ci/jobs/templates.yml
   - cider-ci/jobs/timeout.yml
