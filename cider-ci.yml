@@ -14,6 +14,7 @@ include:
   - cider-ci/jobs/exclusive-global-resources.yml
   - cider-ci/jobs/generate-tasks.yml
   - cider-ci/jobs/git-submodules.yml
+  - cider-ci/jobs/include.yml
   - cider-ci/jobs/info.yml
   - cider-ci/jobs/introduction.yml
   - cider-ci/jobs/job-dependencies.yml

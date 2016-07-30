@@ -1,0 +1,21 @@
+jobs:
+  include-demo:
+    name: Include Demo
+    description: This demonstrates the `include` directive.
+    context:
+      tasks:
+        simple-path-include:
+          environment_variables:
+            include: 'cider-ci/data/m1.yml'
+          body: |
+            set -eux
+            [ $A = 'm1a' ] && [ $B = 'm1b' ] && [ $C = 'm1c' ]
+        multiple-include-and-local-override:
+          environment_variables:
+            A: 'local-value'
+            include:
+              - 'cider-ci/data/m1.yml'
+              - 'cider-ci/data/m2.yml'
+          body: |
+            set -eux
+            [ $A = 'local-value' ] && [ $B = 'm1b' ] && [ $C = 'm2c' ]
