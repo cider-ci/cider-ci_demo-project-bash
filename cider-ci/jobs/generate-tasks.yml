@@ -13,3 +13,20 @@ jobs:
             body: bash -c $CIDER_CI_TASK_FILE
       generate_tasks:
         include_match: specs/.*_spec.sh
+
+  task-generator-submodules:
+    name: Generate Tasks for Submodules Demo
+    description: |
+      To generate tasks based on files in submodules the path to the submodule
+      is given as the value of the submodule key. This value is always an array
+      to the end of resolving nested submodules. Note that the resulting
+      CIDER_CI_TASK_FILE is relative to the root directory of the submodule.
+    context:
+      task_defaults:
+        scripts:
+          main:
+            body: echo "File $CIDER_CI_TASK_FILE"
+      generate_tasks:
+        submodule: [submodule-data-only]
+        include_match: data/007
+
