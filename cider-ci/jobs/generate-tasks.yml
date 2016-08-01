@@ -1,0 +1,15 @@
+jobs:
+
+  task-generator:
+    name: Generate Tasks Demo
+    description: |
+      The directive `generate_tasks` can be used
+      to generate tasks on the basis of files checked into the
+      git repository.
+    context:
+      task_defaults:
+        scripts:
+          main:
+            body: bash -c $CIDER_CI_TASK_FILE
+      generate_tasks:
+        include_match: specs/.*_spec.sh

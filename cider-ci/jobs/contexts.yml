@@ -1,0 +1,69 @@
+jobs:
+
+  contexts-demo:
+    name: Contexts Demo
+    description:
+      This job demonstrates the use of contexts and the inheritance
+      of `task_defaults` e.g. from the top level context to its
+      contexts.
+
+    context:
+
+      task_defaults:
+        traits:
+          Bash: true
+        environment_variables:
+           STAR: Sun
+           PLANET: Earth
+           MOON: Moon
+
+      tasks:
+
+        earth-check:
+          name: Earth Check
+          scripts:
+            main:
+              body: |
+                test $STAR = 'Sun'  \
+                && test $PLANET = 'Earth' \
+                && test $MOON = 'Moon'
+
+      contexts:
+
+        jupiter:
+
+          name: Jupiter
+
+          task_defaults:
+            environment_variables:
+              PLANET: Jupiter
+
+          tasks:
+            jupiter-check:
+              name: Jupiter Check
+              scripts:
+                main:
+                  body: |
+                    test $STAR = 'Sun'  \
+                    && test $PLANET = 'Jupiter'
+
+          contexts:
+
+            io:
+
+              name: Io
+
+              task_defaults:
+                environment_variables:
+                  MOON: Io
+
+              tasks:
+                io-check:
+                  name: Io Check
+                  scripts:
+                    main:
+                      body: |
+                        test $STAR = 'Sun'  \
+                        && test $PLANET = 'Jupiter' \
+                        && test $MOON = 'Io'
+

@@ -1,0 +1,64 @@
+jobs:
+
+  submodules:
+    name: Submodule Demo
+    description: |
+      This job demonstrates  the usage of the `git_options`/`submodule`
+      specification.  It also checks some properties and fails if the
+      feature does not work as expected.
+
+    context:
+
+      task_defaults:
+        eager_trials: 1
+        max_trials: 2
+
+        traits:
+          Bash: true
+
+        git_options:
+          submodules:
+            include_match: ^.*$
+
+      tasks:
+
+        submodule-exists:
+          name: Verify that README.md in the submodule does exist
+          scripts:
+            main:
+              body: test -f submodule/README.md
+
+        ls-dir:
+          name: List submodule directory
+          scripts:
+            main:
+              body:
+                ls -lah submodule
+
+        test-clone-false:
+          name: Verify that README.md in the submodule does not exist if clone is False
+          git_options:
+            submodules:
+              exclude_match: .*
+          scripts:
+            main:
+              body: test ! -f submodule/README.md
+
+        test-include_match:
+          name: Verify that README.md in the submodule does exist if include_match matches
+          git_options:
+            submodules:
+              include_match: submodule
+          scripts:
+            main:
+              body: test -f submodule/README.md
+
+        test-exclude-match:
+          name: Verify that README.md in the submodule does not exist if include_match does not matche
+          git_options:
+            submodules:
+              exclude_match: submodule|or-whatever
+          scripts:
+            main:
+              body: test ! -f submodule/README.md
+

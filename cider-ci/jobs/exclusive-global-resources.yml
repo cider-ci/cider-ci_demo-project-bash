@@ -1,0 +1,49 @@
+jobs:
+
+  exclusive-resources:
+
+    name: Exclusive Global Resources Demo
+
+    description: |
+      This job demonstrates the `exclusive_global_resources` directive. At a
+      given time at most one trial will be executing for every exclusive global
+      resource. This spans over multiple tasks, and even jobs as the name
+      global suggests.
+
+    # This is a demo and test. The test is only reliable when there is
+    # exactly one executor which has more than one slot and no other trial
+    # is run in parallel. This is true for our integration tests. There can
+    # be false positives in other configurations, i.e. the tests yields
+    # passed but the feature is broken.
+
+    context:
+
+      task_defaults:
+
+        max_trials: 1
+
+        traits:
+          Bash: true
+
+        exclusive_global_resources:
+          "/tmp/_cider-ci_some-global-resource.lock": true
+
+        scripts:
+          test:
+            body: |
+              #!/usr/bin/env bash
+              sleep 1 \
+              && test ! -f  "/tmp/_cider-ci_some-global-resource.lock" \
+              && echo $$ > "/tmp/_cider-ci_some-global-resource.lock"  \
+              && test -f  "/tmp/_cider-ci_some-global-resource.lock" \
+              && test $$ = $(<"/tmp/_cider-ci_some-global-resource.lock") \
+              && sleep 5 \
+              && test $$ = $(<"/tmp/_cider-ci_some-global-resource.lock") \
+              && rm "/tmp/_cider-ci_some-global-resource.lock"
+      tasks:
+
+        task1:
+          name: Task1 - Set and test exclusive lock
+
+        task2:
+          name: Task2 - Set and test exclusive lock

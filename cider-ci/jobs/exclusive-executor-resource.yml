@@ -1,0 +1,95 @@
+jobs:
+
+
+  exclusive-executor-resource:
+    name: Exclusive Executor Resource
+    description:
+      This job tests the `exclusive_executor_resource` directive of scripts.
+
+      The `exclusive_executor_resource` directive ensures that at any given
+      time only one script with a particular value is executing for a
+      particular executor.
+
+
+    context:
+
+      script_defaults:
+
+        exclusive_executor_resource: "/tmp/exclusive-executor-resource.txt"
+
+        body: |
+          set -eux
+          START_VAL=$(echo $RANDOM | shasum | cut -d ' ' -f 1)
+          echo "$START_VAL" > /tmp/exclusive-executor-resource.txt
+          sleep $((RANDOM % 5 + 1))
+          FILE_VAL=$(cat /tmp/exclusive-executor-resource.txt)
+          test $FILE_VAL = $START_VAL
+
+
+      task_defaults:
+
+        traits:
+          Bash: true
+
+      tasks:
+
+        task1:
+          scripts:
+            s1: {}
+            s2: {}
+            s3: {}
+            s4: {}
+            s5: {}
+
+        task2:
+          scripts:
+            s1: {}
+            s2: {}
+            s3: {}
+            s4: {}
+            s5: {}
+
+
+
+  exclusive-executor-resource-with-templated-port:
+    name: Exclusive Executor Resource with Templated Port
+    description:
+      This job tests the `exclusive_executor_resource` directive of scripts
+      including templating the value with a environment variable created
+      by a port directive.
+
+    context:
+
+      task_defaults:
+        ports:
+          TEST_PORT:
+            min: 5000
+            max: 6000
+        traits:
+          Bash: true
+
+      script_defaults:
+
+        exclusive_executor_resource: "/tmp/exclusive-executor-resource_on_{{TEST_PORT}}.txt"
+
+        body: |
+          set -eux
+          START_VAL=$(echo $RANDOM | shasum | cut -d ' ' -f 1)
+          echo "$START_VAL" > /tmp/exclusive-executor-resource_on_${TEST_PORT}.txt
+          sleep $((RANDOM % 5 + 1))
+          FILE_VAL=$(cat /tmp/exclusive-executor-resource_on_${TEST_PORT}.txt)
+          test $FILE_VAL = $START_VAL
+
+
+      tasks:
+
+        task1:
+          scripts:
+            s1: {}
+            s2: {}
+
+        task2:
+          scripts:
+            s1: {}
+            s2: {}
+

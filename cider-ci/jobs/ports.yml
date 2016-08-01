@@ -1,0 +1,36 @@
+jobs:
+
+  ports:
+    name: Ports Demo
+    description: |
+      This job demonstrates the usage of the `ports` directive. An executor
+      will determine an available port out of the given range and announce it
+      to the trial via an environment variable. The trial will fail if no
+      port is available.
+
+    context:
+
+      task_defaults:
+        traits:
+          Bash: true
+        environment_variables:
+          CI_TASK_DEFAULTS: "Inherited!"
+
+      tasks:
+
+        ports:
+
+          name: Ports Demo
+
+          description: This task demonstrates the `ports` property.
+
+          ports:
+            XVNC_PORT:
+              min: 5900
+              max: 5999
+
+          scripts:
+            list:
+              body: env | sort
+            test:
+              body: echo ${XVNC_PORT? "XVNC_PORT is not set!"}

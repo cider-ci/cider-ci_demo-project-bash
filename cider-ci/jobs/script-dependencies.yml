@@ -1,0 +1,147 @@
+jobs:
+
+  scripts-dependencies:
+    name: Script Dependencies
+    description: |
+      This job demonstrates scripts which defined to depend on each other
+      for starting and termination.
+
+    context:
+
+      script_defaults:
+        body: echo $(date) && sleep 1 && echo $(date) && test a = a
+      task_defaults:
+        max_trials: 1
+        traits:
+          Bash: true
+
+      tasks:
+
+        fail:
+          name: Fail
+          description: |
+            This tasks has one script which will fail, hence the task will fail.
+          scripts:
+            fail:
+              name: Failing script
+              body: echo $(date) && sleep 1 && echo $(date) && test a = b
+
+
+        fail-but-ignore:
+          name: Fail but ignore
+          description: |
+            This tasks has one script which will fail but is ignored, hence the task succeeds.
+          scripts:
+            fail:
+              body: echo $(date) && sleep 1 && echo $(date) && test a = b
+              ignore_state: true
+            pass:
+              body: echo $(date) && sleep 1 && echo $(date) && test a = a
+
+        skip:
+          name: Skip
+          description: |
+            This tasks has one script which will be skipped because the dependency
+            is never met, hence the task should fail.
+          scripts:
+            skipped:
+              name: unmet-dependency
+              body: echo $(date) && sleep 1 && echo $(date) && test a = b
+              start_when:
+                root-has-passed:
+                  script_key: root
+
+        skip-but-ignore:
+          name: Skip but ignore
+          description: |
+            This tasks has one script which will be skipped because the dependency
+            is never met. However it is ignored and hence the task should pass.
+          scripts:
+            skipped:
+              name: unmet-dependency
+              body: echo $(date) && sleep 1 && echo $(date) && test a = b
+              ignore_state: true
+              start_when:
+                root-has-passed:
+                  script_key: root
+
+        comprehensive:
+          name: Comprehensive
+          description: |
+            This tasks shows all the preceding features.
+          scripts:
+            root:
+              name: Root
+
+            failing:
+              name: Failing
+              body: echo $(date) && sleep 1 && echo $(date) && test a = b
+              ignore_state: true
+              start_when:
+                root-has-passed:
+                  script_key: root
+
+            start_when-failing-passed:
+              name: Start when "failing" passed
+              ignore_state: true
+              start_when:
+                script-failing-has-passed:
+                  script_key: script-failing
+
+            start_when-failing-failed:
+              name: Start when "failing" failed
+              start_when:
+                failing-has-failed:
+                  script_key: failing
+                  states: [failed]
+
+        termination:
+          name: Termination
+          scripts:
+            initial:
+              name: Initial
+              body: |
+                echo "initial pid $$" >> initial.log
+                echo "initial pid $$"
+                time sleep 10 && echo "done"
+            to_be_terminated:
+              name: Terminate when initial finished
+              timeout: 30 Seconds
+              body: |
+                echo "to be terminated pid $$" >> to_be_terminated.log
+                echo "to be terminated pid $$"
+                time sleep 20 && echo "should never be reached"
+              start_when:
+                initial-is-executing:
+                  script_key: initial
+                  states: [executing]
+              terminate_when:
+                initial-has-terminated:
+                  script_key: initial
+                  states: [aborted, defective, failed, passed, skipped]
+
+        skipping:
+          name: Start on Skipped
+          description: |
+            This tasks demonstrate the eager setting of the skipped state
+            and an other script depending on this state.
+          scripts:
+            initial:
+              name: Initial
+              body: exit 0
+            never-satisfied:
+              name: Never Satisfied
+              body: exit 0
+              ignore_state: true
+              start_when:
+                initial-has-failed:
+                  script_key: initial
+                  states: [failed]
+            when-skipped:
+              body: exit 0
+              name: When "Never Satisfied" Skipped
+              start_when:
+                nerver-satisfied-has-been-skipped:
+                  script_key: never-satisfied
+                  states: [skipped]
+
