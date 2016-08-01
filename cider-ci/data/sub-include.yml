@@ -1,5 +1,0 @@
-include:
-- path: cider-ci/data/m1.yml
-- path: cider-ci/data/m2.yml
-  submodule: ["submodule"]
-

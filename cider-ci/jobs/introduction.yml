@@ -1,8 +1,0 @@
-jobs:
-  introduction-demo:
-    name: Introduction Demo and Example Job
-    description: |
-      A very concise job declaration which uses the compact notation.
-    task: |
-      :; exit 0
-      exit /b 0

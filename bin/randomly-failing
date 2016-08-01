@@ -1,5 +1,0 @@
-#!/bin/bash
-RES=$((RANDOM % 7))
-echo "exiting with $RES"
-sleep 60
-exit $RES
