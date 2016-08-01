@@ -19,3 +19,34 @@ jobs:
           body: |
             set -eux
             [ $A = 'local-value' ] && [ $B = 'm1b' ] && [ $C = 'm2c' ]
+
+        multiple-include-and-local-override:
+          environment_variables:
+            A: 'local-value'
+            include:
+              - 'cider-ci/data/m1.yml'
+              - 'cider-ci/data/m2.yml'
+          body: |
+            set -eux
+            [ $A = 'local-value' ] && [ $B = 'm1b' ] && [ $C = 'm2c' ]
+
+        nested-toplevel-includes:
+          environment_variables:
+            A: 'local-value'
+            include: cider-ci/data/sub-include.yml
+          body: |
+            set -eux
+            [ $A = 'local-value' ] && [ $B = 'm1b' ] && [ $C = 'm2c' ]
+
+        submodule-include-precedence:
+          environment_variables:
+            include:
+              - 'cider-ci/data/m1.yml'
+              - path: 'cider-ci/data/m2.yml'
+                submodule: ["submodule"]
+              - path: 'data/m3.yml'
+                submodule: ["submodule-data-only"]
+          body: |
+            set -eux
+            [ $A = 'm1a' ] && [ $B = 'm3b' ] && [ $C = 'm2c' ]
+
