@@ -52,4 +52,4 @@ jobs:
         <<: *TASK_DEFAULTS
       tasks:
         task1:
-          aggregate_state: satisfy-last
+          aggregate_state: satisfy-blah
