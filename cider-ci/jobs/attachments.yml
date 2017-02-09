@@ -3,8 +3,8 @@ jobs:
     name: Attachments Demo
     description: |
       This job demonstrates the usage of the `tree_attachments` and
-      `trial_attachments` directive.  It creates a file which is then attached
-      as a tree- as well as a trial-attachment.
+      `trial_attachments` directive.  It creates files which are attached
+      as tree- / trial-attachments respectively.
 
     context:
 
@@ -29,9 +29,11 @@ jobs:
 
           scripts:
             trial-attachment:
-              body: >
-                mkdir -p tmp &&
+              body: |
+                set -eux
+                mkdir -p tmp
                 echo 'I am a trial attachment!' > tmp/a-trial-attachment.txt
+                touch tmp/null-trial-attachment.txt
             tree-attachment:
               body: >
                 mkdir -p tmp &&
