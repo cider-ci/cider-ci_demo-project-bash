@@ -1,0 +1,18 @@
+jobs:
+  cron-triggered-job:
+    name: Cron-Job Demo
+    description: |
+      This job is triggered via a cron expression (matches any time). There
+      is an additional dependency on a branch named 'cron-test' to prevent
+      unintended invocation.
+    run_when:
+      'start every minute':
+        type: cron
+        value: '* * * * *'
+    depends_on:
+      "cron-test branch":
+        type: branch
+        include_match: ^cron-test$
+    task: |
+      :; exit 0
+      exit /b 0
