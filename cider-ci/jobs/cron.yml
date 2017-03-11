@@ -16,3 +16,23 @@ jobs:
     task: |
       :; exit 0
       exit /b 0
+
+  cron-triggered-rerun-job:
+    name: Cron-Job with Rerun Demo
+    description: |
+      This job is triggered via a cron expression (matches any time) which is
+      also set to rerun the test. There is an additional dependency on a branch
+      named 'cron-rerun-test' to prevent unintended invocation.
+    run_when:
+      'start every minute':
+        type: cron
+        value: '* * * * *'
+        rerun: true
+    depends_on:
+      "cron-rerun-test branch":
+        type: branch
+        include_match: ^cron-rerun-test$
+    task: |
+      :; sleep 30 && exit 0
+      timeout 30
+      exit /b 0
