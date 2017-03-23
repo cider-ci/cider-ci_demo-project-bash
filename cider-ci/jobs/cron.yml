@@ -3,16 +3,13 @@ jobs:
     name: Cron-Job Demo
     description: |
       This job is triggered via a cron expression (matches any time). There
-      is an additional dependency on a branch named 'cron-test' to prevent
+      is an additional match on a branch named 'cron-test' to prevent
       unintended invocation.
     run_when:
       'start every minute':
         type: cron
         value: '* * * * *'
-    depends_on:
-      "cron-test branch":
-        type: branch
-        include_match: ^cron-test$
+        branch_include_match: ^cron-test$
     task: |
       :; exit 0
       exit /b 0
@@ -21,17 +18,14 @@ jobs:
     name: Cron-Job with Rerun Demo
     description: |
       This job is triggered via a cron expression (matches any time) which is
-      also set to rerun the test. There is an additional dependency on a branch
-      named 'cron-rerun-test' to prevent unintended invocation.
+      also set to rerun the test. There is an additional match on a branch named
+      'cron-rerun-test' to prevent unintended invocation.
     run_when:
       'start every minute':
         type: cron
         value: '* * * * *'
+        branch_include_match: ^cron-rerun-test$
         rerun: true
-    depends_on:
-      "cron-rerun-test branch":
-        type: branch
-        include_match: ^cron-rerun-test$
     task: |
       :; sleep 30 && exit 0
       timeout 30
