@@ -27,6 +27,10 @@ jobs:
         git-log:
           name: Show the Last Three Commits
           body: git log -n3
+        
+        use-emoji:
+          name: "\uD83C\uDFAF make sure emoji work"
+          body: "echo '\uD83C\uDD97'"
 
       task_defaults:
         traits: [git, Bash]
