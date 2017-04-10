@@ -27,6 +27,10 @@ jobs:
         git-log:
           name: Show the Last Three Commits
           body: git log -n3
+          
+        fail-with-emoji:
+          description: '🏢'
+          body: 'echo "🏢"'
 
       task_defaults:
         traits: [git, Bash]
