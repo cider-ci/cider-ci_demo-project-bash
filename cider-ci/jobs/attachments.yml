@@ -21,6 +21,9 @@ jobs:
             tmp-files:
               content_type: text/plain
               include_match: ^tmp\/.*trial.*\.txt$
+            tmp-files-exact-match:
+              content_type: text/plain
+              include_match: ^tmp\/exact-matching-filename\.txt$
 
           tree_attachments:
             tmp-files:
@@ -33,6 +36,7 @@ jobs:
                 set -eux
                 mkdir -p tmp
                 echo 'I am a trial attachment!' > tmp/a-trial-attachment.txt
+                echo 'I am another trial attachment!' > tmp/exact-matching-filename.txt
                 touch tmp/null-trial-attachment.txt
             tree-attachment:
               body: >
